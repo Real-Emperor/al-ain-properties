@@ -1,0 +1,147 @@
+// Al Ain Properties - Prisma Schema
+// SQLite database (file-based, no external DB needed)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./../db/custom.db"
+}
+
+// ─── Admin User (single owner-managed account) ───
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  phone        String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// ─── Property ───
+model Property {
+  id            String   @id @default(cuid())
+  // Slug for SEO-friendly URL (e.g., "3bedroom-villa-al-jimi")
+  slug          String   @unique
+  titleEn       String
+  titleAr       String
+  descriptionEn String
+  descriptionAr String
+
+  // Type: villa, apartment, shop, office, warehouse, farm, land
+  type          String
+  // Listing type: rent, sale
+  listingType   String   @default("rent")
+
+  // Location
+  area          String   // Al Jimi, Al Towayya, Al Hili, etc.
+  addressEn     String?
+  addressAr     String?
+  latitude      Float?
+  longitude     Float?
+
+  // Property details
+  price         Int      // in AED
+  bedrooms      Int      @default(0)
+  bathrooms     Int      @default(0)
+  sizeSqft      Int      @default(0)
+  furnished     Boolean  @default(false)
+
+  // Photos: JSON array of image URLs (stored in /public/uploads or external)
+  photos        String   @default("[]")
+  videoUrl      String?
+
+  // Features: JSON array (e.g., ["Pool", "Garden", "Parking", "Maid Room"])
+  features      String   @default("[]")
+
+  // Status
+  status        String   @default("active") // active, rented, sold, draft
+  featured      Boolean  @default(false)
+  views         Int      @default(0)
+
+  // Timestamps
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  inquiries     PropertyInquiry[]
+  viewings      ViewingBooking[]
+
+  @@index([type])
+  @@index([listingType])
+  @@index([area])
+  @@index([status])
+  @@index([featured])
+}
+
+// ─── Property Inquiry (from contact form / WhatsApp redirect) ───
+model PropertyInquiry {
+  id          String   @id @default(cuid())
+  propertyId  String?
+  property    Property? @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  name        String
+  phone       String
+  email       String?
+  message     String
+  // Source: contact_form, property_page, whatsapp_redirect
+  source      String   @default("contact_form")
+  status      String   @default("new") // new, contacted, closed
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([propertyId])
+  @@index([status])
+}
+
+// ─── Viewing Booking (form data goes to WhatsApp) ───
+model ViewingBooking {
+  id            String   @id @default(cuid())
+  propertyId    String?
+  property      Property? @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  name          String
+  phone         String
+  email         String?
+  preferredDate String
+  preferredTime String
+  message       String?
+  // Status: new, confirmed, completed, cancelled
+  status        String   @default("new")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([propertyId])
+  @@index([status])
+}
+
+// ─── News Article ───
+model NewsArticle {
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  titleEn      String
+  titleAr      String
+  excerptEn    String
+  excerptAr    String
+  contentEn    String
+  contentAr    String
+  category     String   @default("Market Updates") // Al Ain Property News, UAE Real Estate News, Rental Market Updates, New Projects, Investment News
+  coverImage   String?
+  status       String   @default("published") // published, draft
+  views        Int      @default(0)
+  publishedAt  DateTime @default(now())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([status])
+  @@index([category])
+  @@index([publishedAt])
+}
+
+// ─── Site Settings (contact info, social links, etc.) ───
+model SiteSetting {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String
+}
