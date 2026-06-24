@@ -4,10 +4,19 @@ const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined
 }
 
+// Ensure DATABASE_URL is set
+const databaseUrl = process.env.DATABASE_URL
+if (!databaseUrl) {
+  console.error('⚠️ DATABASE_URL is not set! Check your .env file.')
+}
+
 export const db =
   globalForPrisma.prisma ??
   new PrismaClient({
-    log: ['query'],
+    log: process.env.NODE_ENV === 'development' ? ['error', 'warn'] : ['error'],
+    datasources: databaseUrl ? {
+      db: { url: databaseUrl },
+    } : undefined,
   })
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = db
