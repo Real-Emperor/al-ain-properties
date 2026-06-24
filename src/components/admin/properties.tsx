@@ -13,6 +13,7 @@ import { useI18n } from "@/i18n/provider"
 import { AL_AIN_AREAS, PROPERTY_TYPES, LISTING_TYPES, formatPrice, getAreaByValue, getTypeByValue } from "@/lib/site-config"
 import { Plus, Pencil, Trash2, Eye, Star } from "lucide-react"
 import { toast } from "sonner"
+import { PhotoUploader } from "./photo-uploader"
 
 export function AdminProperties() {
   const { t, locale } = useI18n()
@@ -283,14 +284,10 @@ export function AdminProperties() {
                 <Input value={editing.longitude} onChange={e => setEditing({ ...editing, longitude: e.target.value })} className="mt-1" dir="ltr" />
               </div>
               <div className="md:col-span-2">
-                <Label>{t("admin.property.photos")}</Label>
-                <Textarea
+                <PhotoUploader
                   value={editing.photos}
-                  onChange={e => setEditing({ ...editing, photos: e.target.value })}
-                  rows={3}
-                  className="mt-1 text-xs"
-                  dir="ltr"
-                  placeholder="https://images.unsplash.com/photo-1..."
+                  onChange={(v) => setEditing({ ...editing, photos: v })}
+                  label={t("admin.property.photos")}
                 />
               </div>
               <div className="md:col-span-2">

@@ -31,7 +31,7 @@ interface SearchProperty {
   views: number
 }
 
-export function SearchSection({ properties }: { properties: SearchProperty[] }) {
+export function SearchSection({ properties, onPropertyClick }: { properties: SearchProperty[]; onPropertyClick?: (p: SearchProperty) => void }) {
   const { t, locale } = useI18n()
   const [filters, setFilters] = useState({
     area: "all",
@@ -342,7 +342,7 @@ export function SearchSection({ properties }: { properties: SearchProperty[] }) 
               <>
                 <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
                   {filtered.slice(0, visibleCount).map(p => (
-                    <PropertyCard key={p.id} property={p} />
+                    <PropertyCard key={p.id} property={p} onClick={onPropertyClick} />
                   ))}
                 </div>
                 {visibleCount < filtered.length && (

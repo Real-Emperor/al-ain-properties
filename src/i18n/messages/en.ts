@@ -43,7 +43,7 @@ export const en = {
   },
   home: {
     heroTitle: "Find Your Dream Property in Al Ain",
-    heroSubtitle: "Discover premium villas, apartments, shops, offices, and land in the Garden City of the UAE",
+    heroSubtitle: "Discover premium villas, apartments, shops, offices, and land in Al Ain, UAE",
     heroCta: "Start Your Search",
     heroSecondaryCta: "Browse Properties",
     searchTitle: "Advanced Property Search",
@@ -206,9 +206,9 @@ export const en = {
   },
   about: {
     title: "About Al Ain Properties",
-    subtitle: "Your trusted real estate partner in the Garden City",
+    subtitle: "Your trusted real estate partner in Al Ain, UAE",
     storyTitle: "Our Story",
-    storyContent: "Al Ain Properties was founded with a simple mission: to make property hunting in Al Ain effortless, transparent, and rewarding. As a locally-rooted agency, we know every neighborhood, every street, and every hidden gem in the Garden City. Whether you're looking for a family villa in Al Jimi, a modern apartment in Al Hili, or a commercial space in the city center, we're here to guide you every step of the way.",
+    storyContent: "Al Ain Properties was founded with a simple mission: to make property hunting in Al Ain effortless, transparent, and rewarding. As a locally-rooted agency, we know every neighborhood, every street, and every hidden gem in Al Ain. Whether you're looking for a family villa in Al Jimi, a modern apartment in Al Hili, or a commercial space in the city center, we're here to guide you every step of the way.",
     missionTitle: "Our Mission",
     missionContent: "To connect people with properties that match their lifestyle, budget, and aspirations — backed by honest advice, deep market knowledge, and personalized service.",
     whyChooseUs: "Why Choose Us",
@@ -248,7 +248,7 @@ export const en = {
     address: "Address",
     addressValue: "Near LuLu Murab'aa, City Center, Al Ain, UAE",
     workingHours: "Working Hours",
-    workingHoursValue: "Saturday - Thursday: 9:00 AM - 9:00 PM | Friday: 4:00 PM - 9:00 PM",
+    workingHoursValue: "Every day: 9:30 AM - 11:00 PM",
     formTitle: "Send Us a Message",
   },
   admin: {

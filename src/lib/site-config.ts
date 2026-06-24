@@ -32,8 +32,8 @@ export const SITE_CONFIG = {
   domainUrl: "https://alainproperties.com",
 
   workingHours: {
-    en: "Saturday - Thursday: 9:00 AM - 9:00 PM | Friday: 4:00 PM - 9:00 PM",
-    ar: "السبت - الخميس: 9:00 ص - 9:00 م | الجمعة: 4:00 م - 9:00 م",
+    en: "Every day: 9:30 AM - 11:00 PM",
+    ar: "كل يوم: 9:30 ص - 11:00 م",
   },
 
   social: {

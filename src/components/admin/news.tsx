@@ -13,6 +13,7 @@ import { useI18n } from "@/i18n/provider"
 import { NEWS_CATEGORIES } from "@/lib/site-config"
 import { Plus, Pencil, Trash2, Eye } from "lucide-react"
 import { toast } from "sonner"
+import { SinglePhotoUploader } from "./photo-uploader"
 
 export function AdminNews() {
   const { t, locale } = useI18n()
@@ -181,12 +182,9 @@ export function AdminNews() {
               </div>
               <div className="md:col-span-2">
                 <Label>{t("admin.news.coverImage")}</Label>
-                <Input
-                  value={editing.coverImage}
-                  onChange={e => setEditing({ ...editing, coverImage: e.target.value })}
-                  className="mt-1"
-                  dir="ltr"
-                  placeholder="https://images.unsplash.com/..."
+                <SinglePhotoUploader
+                  value={editing.coverImage || ""}
+                  onChange={(v) => setEditing({ ...editing, coverImage: v })}
                 />
               </div>
             </div>

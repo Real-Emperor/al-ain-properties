@@ -6,7 +6,7 @@ import { PropertyCard } from "@/components/property-card"
 import { useI18n } from "@/i18n/provider"
 import { SectionHeader } from "@/components/sections/section-header"
 
-export function FeaturedProperties({ properties }: { properties: any[] }) {
+export function FeaturedProperties({ properties, onPropertyClick }: { properties: any[]; onPropertyClick?: (p: any) => void }) {
   const { t, locale } = useI18n()
   const featured = properties.filter(p => p.featured).slice(0, 6)
   const toShow = featured.length > 0 ? featured : properties.slice(0, 6)
@@ -23,7 +23,7 @@ export function FeaturedProperties({ properties }: { properties: any[] }) {
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
           {toShow.map((p) => (
-            <PropertyCard key={p.id} property={p} />
+            <PropertyCard key={p.id} property={p} onClick={onPropertyClick} />
           ))}
         </div>
         <div className="mt-10 text-center">

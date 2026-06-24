@@ -46,7 +46,7 @@ export function HeroSection() {
           <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
             <MapPin className="h-4 w-4 text-[#c9a84c]" />
             <span className="text-sm font-medium">
-              {locale === "ar" ? "مدينة الحدائق - الإمارات العربية المتحدة" : "The Garden City — United Arab Emirates"}
+              {locale === "ar" ? "العين - الإمارات العربية المتحدة" : "Al Ain — United Arab Emirates"}
             </span>
           </div>
 

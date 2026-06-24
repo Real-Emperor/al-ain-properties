@@ -75,8 +75,8 @@ export default function HomePage() {
       <SiteHeader />
       <main className="flex-1">
         <HeroSection />
-        <SearchSection properties={properties} />
-        <FeaturedProperties properties={properties} />
+        <SearchSection properties={properties} onPropertyClick={openProperty} />
+        <FeaturedProperties properties={properties} onPropertyClick={openProperty} />
         <PopularAreas propertyCounts={stats?.propertyCountsByArea || {}} />
         <CategoriesSection propertyCounts={stats?.propertyCountsByCategory || {}} />
         <AboutSection />
