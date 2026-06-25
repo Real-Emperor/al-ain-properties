@@ -15,6 +15,7 @@ import { AboutSection } from "@/components/sections/about"
 import { ContactSection } from "@/components/sections/contact"
 import { PropertyDetailsModal } from "@/components/property-details-modal"
 import { PropertyCardData } from "@/components/property-card"
+import { DemoDisclaimerPopup } from "@/components/demo-disclaimer-popup"
 
 export default function HomePage() {
   const [properties, setProperties] = useState<PropertyCardData[]>([])
@@ -72,6 +73,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <DemoDisclaimerPopup />
       <SiteHeader />
       <main className="flex-1">
         <HeroSection />

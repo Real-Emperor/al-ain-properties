@@ -113,9 +113,25 @@ export function SiteFooter() {
           <p className="text-xs text-white/60 text-center md:text-start">
             © {year} {locale === "ar" ? SITE_CONFIG.brandName.ar : SITE_CONFIG.brandName.en}. {t("common.footer.rightsReserved")}.
           </p>
-          <div className="flex gap-4 text-xs text-white/60">
-            <a href="#" className="hover:text-[#c9a84c] transition-colors">{t("common.footer.privacyPolicy")}</a>
-            <a href="#" className="hover:text-[#c9a84c] transition-colors">{t("common.footer.termsOfService")}</a>
+          <div className="flex flex-col md:flex-row items-center gap-3">
+            <a
+              href="https://phronesis-studio.com/en"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-xs text-white/60 hover:text-[#c9a84c] transition-colors group"
+              title="Phronesis Studio — Studio of Practical Wisdom"
+            >
+              <img
+                src="/phronesis-logo.png"
+                alt="Phronesis Studio"
+                className="h-6 w-6 object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+              />
+              <span>Website crafted by Phronesis Studio</span>
+            </a>
+            <div className="flex gap-4 text-xs text-white/60">
+              <a href="#" className="hover:text-[#c9a84c] transition-colors">{t("common.footer.privacyPolicy")}</a>
+              <a href="#" className="hover:text-[#c9a84c] transition-colors">{t("common.footer.termsOfService")}</a>
+            </div>
           </div>
         </div>
       </div>
