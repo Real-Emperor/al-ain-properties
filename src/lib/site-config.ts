@@ -15,7 +15,7 @@ export const SITE_CONFIG = {
   whatsapp: "971542311225",
   whatsappDisplay: "+971 54 231 1225",
 
-  email: "mohammadmosaaliali@gmail.com",
+  email: "info@alainproperties.ae",
 
   address: {
     en: "Near LuLu Murab'aa, City Center, Al Ain, UAE",
