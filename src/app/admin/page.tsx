@@ -117,13 +117,13 @@ export default function AdminPage() {
             </a>
           </div>
           <div className="mt-4 p-3 rounded-lg bg-muted/50 text-xs text-muted-foreground">
-            <p className="font-semibold mb-1">{locale === "ar" ? "بيانات الدخول الافتراضية:" : "Default credentials:"}</p>
-            <p dir="ltr">Email: admin@alainproperties.com</p>
-            <p dir="ltr">Password: AlAin@Admin2024!</p>
+            <p className="font-semibold mb-1">{locale === "ar" ? "بيانات الدخول:" : "Admin credentials:"}</p>
+            <p dir="ltr">Email: manager.mosa@alainproperties.ae</p>
+            <p dir="ltr">Password: AlAin@Prop_2026!Secure</p>
             <p className="mt-1 italic">
               {locale === "ar"
-                ? "(سيتم إنشاء حساب المدير تلقائياً عند أول زيارة للموقع)"
-                : "(Admin account is auto-created on first website visit)"}
+                ? "(تم تدوير بيانات الدخول — تواصل معنا إذا نسيتها)"
+                : "(Credentials have been rotated — contact us if forgotten)"}
             </p>
           </div>
         </Card>
