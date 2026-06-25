@@ -266,19 +266,7 @@ export function SearchSection({ properties, onPropertyClick }: { properties: Sea
                   </Select>
                 </div>
 
-                {/* Min size */}
-                <div>
-                  <Label className="text-xs font-semibold mb-1.5 block">{t("search.minSize")} (ft²)</Label>
-                  <Input
-                    type="number"
-                    placeholder="1000"
-                    value={filters.minSize}
-                    onChange={e => setFilters({ ...filters, minSize: e.target.value })}
-                    className="h-9 text-sm"
-                  />
-                </div>
-
-                {/* Furnished */}
+{/* Furnished */}
                 <div>
                   <Label className="text-xs font-semibold mb-1.5 block">{t("search.furnished")}</Label>
                   <Select value={filters.furnished} onValueChange={v => setFilters({ ...filters, furnished: v })}>
@@ -322,7 +310,6 @@ export function SearchSection({ properties, onPropertyClick }: { properties: Sea
                     <SelectItem value="oldest">{t("search.sortOldest")}</SelectItem>
                     <SelectItem value="price-low">{t("search.sortPriceLow")}</SelectItem>
                     <SelectItem value="price-high">{t("search.sortPriceHigh")}</SelectItem>
-                    <SelectItem value="size">{t("search.sortSize")}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

@@ -168,6 +168,8 @@ export const en = {
     villasSale: "Villas for Sale",
     apartmentsRent: "Apartments for Rent",
     apartmentsSale: "Apartments for Sale",
+    buildingsRent: "Residential Buildings for Rent",
+    buildingsSale: "Residential Buildings for Sale",
     shops: "Shops",
     offices: "Offices",
     warehouses: "Warehouses",

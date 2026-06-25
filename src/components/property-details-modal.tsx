@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Bed, Bath, Maximize, MapPin, Phone, MessageCircle, Calendar, Heart, Share2, Eye, CheckCircle2, X, ChevronLeft, ChevronRight } from "lucide-react"
+import { Bed, Bath, MapPin, Phone, MessageCircle, Calendar, Heart, Share2, Eye, CheckCircle2, X, ChevronLeft, ChevronRight, Building } from "lucide-react"
 import { useI18n } from "@/i18n/provider"
 import { formatPrice, getAreaByValue, getTypeByValue, getWhatsAppLink, getTelLink, SITE_CONFIG } from "@/lib/site-config"
 import { ViewingBookingModal } from "./viewing-booking-modal"
@@ -229,21 +229,16 @@ export function PropertyDetailsModal({
             </div>
 
             {/* Specs grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+            <div className="grid grid-cols-3 gap-4 mb-6">
               <div className="text-center p-3 rounded-lg bg-muted/50">
-                <Bed className="h-5 w-5 mx-auto mb-1 text-[#1e3a8a] dark:text-[#c9a84c]" />
+                {property.type === "building" ? <Building className="h-5 w-5 mx-auto mb-1 text-[#1e3a8a] dark:text-[#c9a84c]" /> : <Bed className="h-5 w-5 mx-auto mb-1 text-[#1e3a8a] dark:text-[#c9a84c]" />}
                 <div className="text-lg font-bold">{property.bedrooms}</div>
-                <div className="text-xs text-muted-foreground">{t("property.bedrooms")}</div>
+                <div className="text-xs text-muted-foreground">{property.type === "building" ? (locale === "ar" ? "وحدات" : "Units") : t("property.bedrooms")}</div>
               </div>
               <div className="text-center p-3 rounded-lg bg-muted/50">
                 <Bath className="h-5 w-5 mx-auto mb-1 text-[#1e3a8a] dark:text-[#c9a84c]" />
                 <div className="text-lg font-bold">{property.bathrooms}</div>
-                <div className="text-xs text-muted-foreground">{t("property.bathrooms")}</div>
-              </div>
-              <div className="text-center p-3 rounded-lg bg-muted/50">
-                <Maximize className="h-5 w-5 mx-auto mb-1 text-[#1e3a8a] dark:text-[#c9a84c]" />
-                <div className="text-lg font-bold">{property.sizeSqft.toLocaleString()}</div>
-                <div className="text-xs text-muted-foreground">ft²</div>
+                <div className="text-xs text-muted-foreground">{property.type === "building" ? (locale === "ar" ? "حمامات" : "Baths") : t("property.bathrooms")}</div>
               </div>
               <div className="text-center p-3 rounded-lg bg-muted/50">
                 <CheckCircle2 className="h-5 w-5 mx-auto mb-1 text-[#1e3a8a] dark:text-[#c9a84c]" />

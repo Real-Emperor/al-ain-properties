@@ -43,6 +43,7 @@ export function AdminProperties() {
       type: "villa", listingType: "rent", area: "al-jimi",
       addressEn: "", addressAr: "",
       latitude: "", longitude: "",
+      mapsUrl: "",
       price: "", bedrooms: 0, bathrooms: 0, sizeSqft: 0,
       furnished: false,
       photos: "", videoUrl: "",
@@ -50,6 +51,32 @@ export function AdminProperties() {
       status: "active", featured: false,
     })
     setDialogOpen(true)
+  }
+
+  // Parse Google Maps URL to extract latitude and longitude
+  const parseMapsUrl = (url: string) => {
+    if (!url) return
+    let lat = "", lng = ""
+    const atMatch = url.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/)
+    if (atMatch) { lat = atMatch[1]; lng = atMatch[2] }
+    if (!lat) {
+      const llMatch = url.match(/[?&]ll=(-?\d+\.\d+),(-?\d+\.\d+)/)
+      if (llMatch) { lat = llMatch[1]; lng = llMatch[2] }
+    }
+    if (!lat) {
+      const queryMatch = url.match(/[?&](?:query|q)=(-?\d+\.\d+),(-?\d+\.\d+)/)
+      if (queryMatch) { lat = queryMatch[1]; lng = queryMatch[2] }
+    }
+    if (!lat) {
+      const dMatch = url.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/)
+      if (dMatch) { lat = dMatch[1]; lng = dMatch[2] }
+    }
+    if (lat && lng) {
+      setEditing((prev: any) => ({ ...prev, latitude: lat, longitude: lng }))
+      toast.success(locale === "ar" ? `تم استخراج الموقع: ${lat}, ${lng}` : `Location extracted: ${lat}, ${lng}`)
+    } else if (url.length > 10) {
+      toast.error(locale === "ar" ? "تعذر استخراج الموقع من الرابط" : "Could not extract location from URL")
+    }
   }
 
   const openEdit = (p: any) => {
@@ -253,7 +280,7 @@ export function AdminProperties() {
                 <Label>{t("admin.property.price")} (AED) *</Label>
                 <Input type="number" value={editing.price} onChange={e => setEditing({ ...editing, price: e.target.value })} className="mt-1" dir="ltr" />
               </div>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-2 gap-2">
                 <div>
                   <Label>{t("admin.property.bedrooms")}</Label>
                   <Input type="number" value={editing.bedrooms} onChange={e => setEditing({ ...editing, bedrooms: e.target.value })} className="mt-1" dir="ltr" />
@@ -261,10 +288,6 @@ export function AdminProperties() {
                 <div>
                   <Label>{t("admin.property.bathrooms")}</Label>
                   <Input type="number" value={editing.bathrooms} onChange={e => setEditing({ ...editing, bathrooms: e.target.value })} className="mt-1" dir="ltr" />
-                </div>
-                <div>
-                  <Label>{t("admin.property.sizeSqft")}</Label>
-                  <Input type="number" value={editing.sizeSqft} onChange={e => setEditing({ ...editing, sizeSqft: e.target.value })} className="mt-1" dir="ltr" />
                 </div>
               </div>
               <div>
@@ -275,12 +298,36 @@ export function AdminProperties() {
                 <Label>{t("admin.property.addressAr")}</Label>
                 <Input value={editing.addressAr} onChange={e => setEditing({ ...editing, addressAr: e.target.value })} className="mt-1" dir="rtl" />
               </div>
+              <div className="md:col-span-2">
+                <Label>{locale === "ar" ? "رابط خرائط جوجل (الصق الرابط وسنستخرج الموقع تلقائياً)" : "Google Maps Link (paste link and we'll extract location automatically)"}</Label>
+                <div className="flex gap-2 mt-1">
+                  <Input
+                    value={editing.mapsUrl || ""}
+                    onChange={e => {
+                      const url = e.target.value
+                      setEditing({ ...editing, mapsUrl: url })
+                      parseMapsUrl(url)
+                    }}
+                    className="text-xs"
+                    dir="ltr"
+                    placeholder="https://www.google.com/maps/place/.../@24.2075,55.7447,17z/..."
+                  />
+                  <Button type="button" size="sm" variant="outline" className="h-9 text-xs" onClick={() => parseMapsUrl(editing.mapsUrl || "")}>
+                    {locale === "ar" ? "استخراج" : "Extract"}
+                  </Button>
+                </div>
+                {(editing.latitude || editing.longitude) && (
+                  <p className="text-[10px] text-green-600 mt-1">
+                    ✓ {locale === "ar" ? "تم استخراج الموقع:" : "Location extracted:"} {editing.latitude}, {editing.longitude}
+                  </p>
+                )}
+              </div>
               <div>
-                <Label>{t("admin.property.latitude")}</Label>
+                <Label>{t("admin.property.latitude")} ({locale === "ar" ? "اختياري" : "optional"})</Label>
                 <Input value={editing.latitude} onChange={e => setEditing({ ...editing, latitude: e.target.value })} className="mt-1" dir="ltr" />
               </div>
               <div>
-                <Label>{t("admin.property.longitude")}</Label>
+                <Label>{t("admin.property.longitude")} ({locale === "ar" ? "اختياري" : "optional"})</Label>
                 <Input value={editing.longitude} onChange={e => setEditing({ ...editing, longitude: e.target.value })} className="mt-1" dir="ltr" />
               </div>
               <div className="md:col-span-2">

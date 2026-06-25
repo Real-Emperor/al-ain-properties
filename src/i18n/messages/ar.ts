@@ -168,6 +168,8 @@ export const ar = {
     villasSale: "فلل للبيع",
     apartmentsRent: "شقق للإيجار",
     apartmentsSale: "شقق للبيع",
+    buildingsRent: "مباني سكنية للإيجار",
+    buildingsSale: "مباني سكنية للبيع",
     shops: "محلات",
     offices: "مكاتب",
     warehouses: "مستودعات",
