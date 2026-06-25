@@ -118,7 +118,7 @@ export default function AdminPage() {
           </div>
           <div className="mt-4 p-3 rounded-lg bg-muted/50 text-xs text-muted-foreground">
             <p className="font-semibold mb-1">{locale === "ar" ? "بيانات الدخول:" : "Admin credentials:"}</p>
-            <p dir="ltr">Email: admin@phronesis-studio.com</p>
+            <p dir="ltr">Email: admin@alainproperties.ae</p>
             <p dir="ltr">Password: AlAin@Admin2026!Secure</p>
             <p className="mt-1 italic">
               {locale === "ar"
