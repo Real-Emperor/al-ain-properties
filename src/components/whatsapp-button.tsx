@@ -6,7 +6,7 @@ import { useI18n } from "@/i18n/provider"
 
 export function WhatsAppButton() {
   const { t } = useI18n()
-  const message = t("whatsapp.defaultMessage") || "Hello Al Ain Properties, I'm interested in your services."
+  const message = t("whatsapp.defaultMessage") || "Hello Al Ain Real Estate, I'm interested in your services."
 
   return (
     <a

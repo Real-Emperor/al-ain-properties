@@ -18,7 +18,7 @@ export function SectionHeader({
       <div className={`inline-flex items-center gap-2 mb-3 ${centered ? "" : ""}`}>
         <span className="h-px w-8 bg-[#c9a84c]" />
         <span className="text-xs font-semibold uppercase tracking-wider text-[#c9a84c]">
-          Al Ain Properties
+          Al Ain Real Estate
         </span>
         <span className="h-px w-8 bg-[#c9a84c]" />
       </div>

@@ -1,4 +1,4 @@
-// Arabic translations for Al Ain Properties
+// Arabic translations for Al Ain Real Estate
 export const ar = {
   common: {
     brandName: "العين العقارية",

@@ -3,19 +3,19 @@
 
 export const SITE_CONFIG = {
   brandName: {
-    en: "Al Ain Properties",
+    en: "Al Ain Real Estate",
     ar: "العين العقارية",
   },
   // Phone & WhatsApp (UAE format)
-  phone: "+971542311225",
-  phoneDisplay: "+971 54 231 1225",
+  phone: "+971561669766",
+  phoneDisplay: "+971 56 166 9766",
   // Phone without + for tel: links
-  phoneTel: "+971542311225",
+  phoneTel: "+971561669766",
   // WhatsApp number (digits only, with country code)
-  whatsapp: "971542311225",
-  whatsappDisplay: "+971 54 231 1225",
+  whatsapp: "971561669766",
+  whatsappDisplay: "+971 56 166 9766",
 
-  email: "info@alainproperties.ae",
+  email: "info@example.com",
 
   address: {
     en: "Near LuLu Murab'aa, City Center, Al Ain, UAE",

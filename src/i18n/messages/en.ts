@@ -1,7 +1,7 @@
-// English translations for Al Ain Properties
+// English translations for Al Ain Real Estate
 export const en = {
   common: {
-    brandName: "Al Ain Properties",
+    brandName: "Al Ain Real Estate",
     brandTagline: "Premium Real Estate in Al Ain",
     nav: {
       home: "Home",
@@ -54,7 +54,7 @@ export const en = {
     latestSubtitle: "Newly added properties to the market",
     popularAreas: "Popular Areas in Al Ain",
     popularAreasSubtitle: "Explore properties in your preferred neighborhood",
-    aboutTitle: "About Al Ain Properties",
+    aboutTitle: "About Al Ain Real Estate",
     aboutSubtitle: "Your trusted real estate partner in Al Ain",
     testimonialsTitle: "What Our Clients Say",
     testimonialsSubtitle: "Real stories from satisfied property owners and tenants",
@@ -207,10 +207,10 @@ export const en = {
     minRead: "min read",
   },
   about: {
-    title: "About Al Ain Properties",
+    title: "About Al Ain Real Estate",
     subtitle: "Your trusted real estate partner in Al Ain, UAE",
     storyTitle: "Our Story",
-    storyContent: "Al Ain Properties was founded with a simple mission: to make property hunting in Al Ain effortless, transparent, and rewarding. As a locally-rooted agency, we know every neighborhood, every street, and every hidden gem in Al Ain. Whether you're looking for a family villa in Al Jimi, a modern apartment in Al Hili, or a commercial space in the city center, we're here to guide you every step of the way.",
+    storyContent: "Al Ain Real Estate was founded with a simple mission: to make property hunting in Al Ain effortless, transparent, and rewarding. As a locally-rooted agency, we know every neighborhood, every street, and every hidden gem in Al Ain. Whether you're looking for a family villa in Al Jimi, a modern apartment in Al Hili, or a commercial space in the city center, we're here to guide you every step of the way.",
     missionTitle: "Our Mission",
     missionContent: "To connect people with properties that match their lifestyle, budget, and aspirations — backed by honest advice, deep market knowledge, and personalized service.",
     whyChooseUs: "Why Choose Us",
@@ -334,7 +334,7 @@ export const en = {
     },
   },
   whatsapp: {
-    defaultMessage: "Hello Al Ain Properties, I'm interested in your services. Could you please assist me?",
+    defaultMessage: "Hello Al Ain Real Estate, I'm interested in your services. Could you please assist me?",
   },
 }
 
