@@ -116,16 +116,6 @@ export default function AdminPage() {
               ← {locale === "ar" ? "العودة للموقع" : "Back to website"}
             </a>
           </div>
-          <div className="mt-4 p-3 rounded-lg bg-muted/50 text-xs text-muted-foreground">
-            <p className="font-semibold mb-1">{locale === "ar" ? "بيانات الدخول:" : "Admin credentials:"}</p>
-            <p dir="ltr">Email: mohammadmosaaliali@gmail.com</p>
-            <p dir="ltr">Password: AlAin@Admin2026!Secure</p>
-            <p className="mt-1 italic">
-              {locale === "ar"
-                ? "(تم تدوير بيانات الدخول — تواصل معنا إذا نسيتها)"
-                : "(Credentials have been rotated — contact us if forgotten)"}
-            </p>
-          </div>
         </Card>
       </div>
     )
