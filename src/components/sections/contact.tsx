@@ -76,8 +76,20 @@ export function ContactSection() {
   ]
 
   return (
-    <section id="contact" className="py-16 md:py-24 bg-muted/30">
-      <div className="container mx-auto px-4">
+    <section id="contact" className="py-16 md:py-24 relative overflow-hidden">
+      {/* Faded background photo covering entire section */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/mohammad-mosa-ali-faded.jpg"
+          alt=""
+          aria-hidden="true"
+          className="w-full h-full object-cover"
+        />
+        {/* White overlay for readability */}
+        <div className="absolute inset-0 bg-background/85" />
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
         <SectionHeader
           title={t("contact.title")}
           subtitle={t("contact.subtitle")}
@@ -94,7 +106,7 @@ export function ContactSection() {
                 target={info.href.startsWith("http") ? "_blank" : undefined}
                 rel={info.href.startsWith("http") ? "noopener noreferrer" : undefined}
               >
-                <Card className="p-5 card-hover flex items-start gap-4">
+                <Card className="p-5 card-hover flex items-start gap-4 bg-background/95 backdrop-blur-sm">
                   <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-[#1e3a8a] to-[#c9a84c] text-white">
                     <info.icon className="h-6 w-6" />
                   </div>
@@ -107,7 +119,7 @@ export function ContactSection() {
             ))}
 
             {/* Working hours */}
-            <Card className="p-5 bg-[#1e3a8a]/5 dark:bg-[#c9a84c]/5 border-[#1e3a8a]/20 dark:border-[#c9a84c]/20">
+            <Card className="p-5 bg-background/95 backdrop-blur-sm border-[#c9a84c]/20">
               <div className="flex items-start gap-4">
                 <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-[#1e3a8a]/10 dark:bg-[#c9a84c]/10">
                   <Clock className="h-6 w-6 text-[#1e3a8a] dark:text-[#c9a84c]" />
@@ -122,7 +134,7 @@ export function ContactSection() {
             </Card>
 
             {/* Owner card */}
-            <Card className="p-5 flex items-center gap-4 border-[#c9a84c]/20">
+            <Card className="p-5 flex items-center gap-4 border-[#c9a84c]/20 bg-background/95 backdrop-blur-sm">
               <img
                 src="/mohammad-mosa-ali-profile.jpg"
                 alt="Mohammad Mosa Ali"
@@ -143,7 +155,7 @@ export function ContactSection() {
           </div>
 
           {/* Right — form */}
-          <Card className="p-6 md:p-8">
+          <Card className="p-6 md:p-8 bg-background/95 backdrop-blur-sm">
             <h3 className="text-xl font-bold mb-6">{t("contact.formTitle")}</h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
