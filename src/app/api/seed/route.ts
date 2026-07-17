@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic"
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json().catch(() => ({}))
-    const adminEmail = body.adminEmail || "admin@example.com"
+    const adminEmail = body.adminEmail || "mohammadmosaaliali@gmail.com"
     const adminPassword = body.adminPassword || "AlAin@Admin2026!Secure"
 
     const results = {
@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
         data: {
           email: adminEmail,
           passwordHash,
-          name: "Phronesis Studio Admin",
+          name: "Mohammad Mosa Ali",
           phone: "+971504870520",
         },
       })
@@ -447,12 +447,12 @@ const SEED_PROPERTIES = [
 const SEED_NEWS = [
   {
     slug: "al-ain-property-market-2026-outlook",
-    titleEn: "Al Ain Property Market 2026: Strong Growth Expected",
-    titleAr: "سوق عقارات العين 2026: نمو قوي متوقع",
-    excerptEn: "Experts predict a 8-12% growth in Al Ain's property market in 2026, driven by infrastructure investment and increasing demand from families.",
-    excerptAr: "يتوقع الخبراء نمواً بنسبة 8-12% في سوق العقارات في العين عام 2026، مدعوماً بالاستثمار في البنية التحتية والطلب المتزايد من العائلات.",
-    contentEn: "Al Ain's property market is poised for strong growth in 2026, according to a new report by leading UAE real estate analysts. Al Ain, often overshadowed by Dubai and Abu Dhabi, is emerging as a preferred destination for families seeking affordable luxury.\n\nKey drivers include the ongoing AED 10 billion infrastructure investment by Al Ain City Municipality, expansion of educational institutions, and the city's growing reputation as a wellness destination. Villa prices in popular areas like Al Jimi and Al Hili have already risen 6% year-on-year, with apartments seeing 4% growth.\n\nExperts recommend that investors consider Al Foah and Al Mutaredh as emerging areas with high growth potential. Rental yields remain attractive at 6-8% for residential properties.",
-    contentAr: "يشهد سوق العقارات في العين نمواً قوياً في عام 2026، وفقاً لتقرير جديد من كبار محللي العقارات في الإمارات. العين، التي غالباً ما تطغى عليها دبي وأبوظبي، تبرز كوجهة مفضلة للعائلات التي تبحث عن فاخر بأسعار معقولة.\n\nتشمل المحركات الرئيسية استثمار بلدية مدينة العين المستمر بقيمة 10 مليار درهم في البنية التحتية، وتوسع المؤسسات التعليمية، والسمعة المتنامية للمدينة كوجهة علاجية. ارتفعت أسعار الفلل في مناطق شائعة مثل الجيمي والهيلي بالفعل بنسبة 6% على أساس سنوي، بينما شهدت الشقق نمواً بنسبة 4%.\n\nينصح الخبراء المستثمرين بالنظر إلى الفوعة والمترع كمناطق ناشئة ذات إمكانات نمو عالية. تظل العوائد الإيجارية جذابة بنسبة 6-8% للعقارات السكنية.",
+    titleEn: "Al Ain Rental Market 2026: Rooms, Studios & Flats in High Demand",
+    titleAr: "سوق إيجار العين 2026: طلب قوي على الغرف والشقق والاستوديوهات",
+    excerptEn: "Al Ain's rental market sees surging demand for rooms, studios, and flats in 2026, with rental yields reaching 7-9% for residential properties.",
+    excerptAr: "يشهد سوق الإيجار في العين طلباً متزايداً على الغرف والاستوديوهات والشقق في عام 2026، مع عوائد إيجارية تصل إلى 7-9% للعقارات السكنية.",
+    contentEn: "Al Ain's rental market is experiencing unprecedented demand in 2026, with rooms, studios, and flats leading the surge. According to leading UAE real estate analysts, Al Ain is emerging as the preferred destination for families and professionals seeking affordable, high-quality rental properties outside the expensive Dubai and Abu Dhabi markets.\n\nKey drivers include the ongoing AED 10 billion infrastructure investment by Al Ain City Municipality, expansion of educational institutions, and the city's growing reputation as a wellness destination. Villa prices in popular areas like Al Jimi and Al Hili have already risen 6% year-on-year, with apartments seeing 4% growth.\n\nExperts recommend that tenants and investors focus on areas like Al Jimi, Al Hili, Zakher, and Al Khibessi for the best rental value. Rooms and studios in these areas offer the most affordable entry points, while 2-3 bedroom flats remain the most sought-after. Rental yields remain attractive at 7-9% for residential properties.",
+    contentAr: "يشهد سوق الإيجار في العين طلباً غير مسبوق في عام 2026، حيث تقود الغرف والاستوديوهات والشقق هذا الارتفاع. وفقاً لكبار محللي العقارات في الإمارات، تبرز العين كوجهة مفضلة للعائلات والمحترفين الذين يبحثون عن عقارات إيجارية عالية الجودة وبأسعار معقولة بعيداً عن أسواق دبي وأبوظبي الباهظة.\n\nتشمل المحركات الرئيسية استثمار بلدية مدينة العين المستمر بقيمة 10 مليار درهم في البنية التحتية، وتوسع المؤسسات التعليمية، والسمعة المتنامية للمدينة كوجهة علاجية. ارتفعت أسعار الفلل في مناطق شائعة مثل الجيمي والهيلي بالفعل بنسبة 6% على أساس سنوي، بينما شهدت الشقق نمواً بنسبة 4%.\n\nينصح الخبراء المستثمرين بالنظر إلى الفوعة والمترع كمناطق ناشئة ذات إمكانات نمو عالية. تظل العوائد الإيجارية جذابة بنسبة 6-8% للعقارات السكنية.",
     category: "Al Ain Property News",
     coverImage: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80",
     status: "published",

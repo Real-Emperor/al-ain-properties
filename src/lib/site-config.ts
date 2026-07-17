@@ -7,15 +7,15 @@ export const SITE_CONFIG = {
     ar: "العين العقارية",
   },
   // Phone & WhatsApp (UAE format)
-  phone: "+971561669766",
-  phoneDisplay: "+971 56 166 9766",
+  phone: "+971542311225",
+  phoneDisplay: "+971 54 231 1225",
   // Phone without + for tel: links
-  phoneTel: "+971561669766",
+  phoneTel: "+971542311225",
   // WhatsApp number (digits only, with country code)
-  whatsapp: "971561669766",
-  whatsappDisplay: "+971 56 166 9766",
+  whatsapp: "971542311225",
+  whatsappDisplay: "+971 54 231 1225",
 
-  email: "info@example.com",
+  email: "mohammadmosaaliali@gmail.com",
 
   address: {
     en: "Near LuLu Murab'aa, City Center, Al Ain, UAE",
@@ -28,8 +28,8 @@ export const SITE_CONFIG = {
     lng: 55.7447,
   },
 
-  domain: "alainproperties.com",
-  domainUrl: "https://alainproperties.com",
+  domain: "alainroomforrent.com",
+  domainUrl: "https://alainroomforrent.com",
 
   workingHours: {
     en: "Every day: 9:30 AM - 11:00 PM",
@@ -74,6 +74,15 @@ export const AL_AIN_AREAS = [
   { value: "al-foah", labelEn: "Al Foah", labelAr: "الفوعة", lat: 24.2575, lng: 55.7147 },
   { value: "falaj-hazza", labelEn: "Falaj Hazza", labelAr: "فلج هزاع", lat: 24.1875, lng: 55.7647 },
   { value: "al-yahar", labelEn: "Al Yahar", labelAr: "اليحر", lat: 24.2675, lng: 55.8047 },
+  { value: "al-khibessi", labelEn: "Al Khibessi", labelAr: "الخبيصي", lat: 24.2150, lng: 55.7680 },
+  { value: "zafrana", labelEn: "Zafrana", labelAr: "زفرنة", lat: 24.2050, lng: 55.7580 },
+  { value: "al-sarouj", labelEn: "Al Sarouj", labelAr: "السروج", lat: 24.2100, lng: 55.7800 },
+  { value: "al-qattara", labelEn: "Al Qattara", labelAr: "القطارة", lat: 24.2400, lng: 55.7600 },
+  { value: "al-muwaiji", labelEn: "Al Muwaiji", labelAr: "المويجعي", lat: 24.2550, lng: 55.7600 },
+  { value: "al-nakhla", labelEn: "Al Nakhla", labelAr: "النخلة", lat: 24.1900, lng: 55.7500 },
+  { value: "al-ain-oasis", labelEn: "Al Ain Oasis", labelAr: "واحة العين", lat: 24.1300, lng: 55.8000 },
+  { value: "al-bateen", labelEn: "Al Bateen", labelAr: "البطين", lat: 24.1450, lng: 55.7850 },
+  { value: "al-mankhool", labelEn: "Al Mankhool", labelAr: "المنخول", lat: 24.2750, lng: 55.7900 },
 ] as const
 
 // ─── Property categories (combination of type + listing type) ───
