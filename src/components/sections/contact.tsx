@@ -77,7 +77,7 @@ export function ContactSection() {
 
   return (
     <section id="contact" className="py-16 md:py-24 relative overflow-hidden">
-      {/* Faded background photo covering entire section */}
+      {/* Faded background photo covering entire section — visible like phronesis-car-rental hero */}
       <div className="absolute inset-0 z-0">
         <img
           src="/mohammad-mosa-ali-faded.jpg"
@@ -85,8 +85,8 @@ export function ContactSection() {
           aria-hidden="true"
           className="w-full h-full object-cover"
         />
-        {/* White overlay for readability */}
-        <div className="absolute inset-0 bg-background/85" />
+        {/* Light overlay — just enough for text readability, photo stays visible */}
+        <div className="absolute inset-0 bg-background/40" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">

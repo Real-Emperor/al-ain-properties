@@ -25,7 +25,6 @@ export function PopularAreas({ propertyCounts }: { propertyCounts: Record<string
                 key={area.value}
                 className="relative overflow-hidden card-hover group cursor-pointer p-0 border-0"
                 onClick={() => {
-                  // Update search filter and scroll to search section
                   window.dispatchEvent(new CustomEvent("filter-by-area", { detail: area.value }))
                   document.getElementById("search")?.scrollIntoView({ behavior: "smooth" })
                 }}
@@ -60,6 +59,7 @@ export function PopularAreas({ propertyCounts }: { propertyCounts: Record<string
   )
 }
 
+// Unique photo for each Al Ain area — all different, all UAE-appropriate
 function getAreaImage(area: string): string {
   const images: Record<string, string> = {
     "al-jimi": "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&q=80",
@@ -71,6 +71,15 @@ function getAreaImage(area: string): string {
     "al-foah": "https://images.unsplash.com/photo-1416339306562-f3d12fefd36f?w=600&q=80",
     "falaj-hazza": "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&q=80",
     "al-yahar": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=600&q=80",
+    "al-khibessi": "https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=600&q=80",
+    "zafrana": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80",
+    "al-sarouj": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80",
+    "al-qattara": "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&q=80",
+    "al-muwaiji": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80",
+    "al-nakhla": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&q=80",
+    "al-ain-oasis": "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=600&q=80",
+    "al-bateen": "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=600&q=80",
+    "al-mankhool": "https://images.unsplash.com/photo-1600573472556-e636c2acda88?w=600&q=80",
   }
   return images[area] || images["al-jimi"]
 }

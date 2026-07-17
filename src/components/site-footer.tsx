@@ -69,15 +69,13 @@ export function SiteFooter() {
           {/* Areas */}
           <div>
             <h3 className="font-semibold text-[#c9a84c] mb-4">{t("common.footer.areas")}</h3>
-            <ul className="space-y-2 text-sm text-white/70">
+            <div className="grid grid-cols-2 gap-x-3 gap-y-1.5 text-sm text-white/70">
               {AL_AIN_AREAS.map(area => (
-                <li key={area.value}>
-                  <a href={`#areas`} className="hover:text-[#c9a84c] transition-colors">
-                    {locale === "ar" ? area.labelAr : area.labelEn}
-                  </a>
-                </li>
+                <a key={area.value} href="#areas" className="hover:text-[#c9a84c] transition-colors truncate">
+                  {locale === "ar" ? area.labelAr : area.labelEn}
+                </a>
               ))}
-            </ul>
+            </div>
           </div>
 
           {/* Contact */}
@@ -128,10 +126,6 @@ export function SiteFooter() {
               />
               <span>Website crafted by Phronesis Studio</span>
             </a>
-            <div className="flex gap-4 text-xs text-white/60">
-              <a href="#" className="hover:text-[#c9a84c] transition-colors">{t("common.footer.privacyPolicy")}</a>
-              <a href="#" className="hover:text-[#c9a84c] transition-colors">{t("common.footer.termsOfService")}</a>
-            </div>
           </div>
         </div>
       </div>
