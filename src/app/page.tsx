@@ -25,8 +25,8 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Auto-seed on first visit
-    const seedIfNeeded = async () => {
+    // Only ensure admin user exists (no auto-seed of demo data)
+    const ensureAdmin = async () => {
       try {
         await fetch("/api/seed", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({}) })
       } catch {}
@@ -34,7 +34,7 @@ export default function HomePage() {
 
     const fetchData = async () => {
       try {
-        await seedIfNeeded()
+        await ensureAdmin()
         const [propsRes, newsRes, statsRes] = await Promise.all([
           fetch("/api/properties"),
           fetch("/api/news"),

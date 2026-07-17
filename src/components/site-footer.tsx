@@ -70,7 +70,7 @@ export function SiteFooter() {
           <div>
             <h3 className="font-semibold text-[#c9a84c] mb-4">{t("common.footer.areas")}</h3>
             <ul className="space-y-2 text-sm text-white/70">
-              {AL_AIN_AREAS.slice(0, 6).map(area => (
+              {AL_AIN_AREAS.map(area => (
                 <li key={area.value}>
                   <a href={`#areas`} className="hover:text-[#c9a84c] transition-colors">
                     {locale === "ar" ? area.labelAr : area.labelEn}

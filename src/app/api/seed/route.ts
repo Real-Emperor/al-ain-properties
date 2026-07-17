@@ -27,30 +27,16 @@ export async function POST(request: NextRequest) {
           email: adminEmail,
           passwordHash,
           name: "Mohammad Mosa Ali",
-          phone: "+971504870520",
+          phone: "+971542311225",
         },
       })
       results.adminUser = true
     }
 
-    // 2. Seed properties if none exist
-    const existingProps = await db.property.count()
-    if (existingProps === 0) {
-      const properties = SEED_PROPERTIES
-      for (const p of properties) {
-        await db.property.create({ data: p })
-      }
-      results.properties = properties.length
-    }
+    // 2. Properties — NOT auto-seeded (admin adds their own via dashboard)
+    // Demo data was wiped for production use
 
-    // 3. Seed news if none exist
-    const existingNews = await db.newsArticle.count()
-    if (existingNews === 0) {
-      for (const n of SEED_NEWS) {
-        await db.newsArticle.create({ data: n })
-      }
-      results.news = SEED_NEWS.length
-    }
+    // 3. News — NOT auto-seeded (admin adds their own via dashboard)
 
     return NextResponse.json({
       success: true,

@@ -1,4 +1,5 @@
 "use client"
+import Link from "next/link"
 
 import { Bed, Bath, MapPin, Heart, GitCompare, Eye, Building, Maximize } from "lucide-react"
 import { Card } from "@/components/ui/card"
@@ -105,6 +106,7 @@ export function PropertyCard({ property, onClick }: { property: PropertyCardData
     : `Hello, I'm interested in this property: ${property.titleEn} (${formatPrice(property.price, "en")})`
 
   return (
+    <Link href={`/property/${property.slug}`} className="block">
     <Card
       className="overflow-hidden card-hover group relative flex flex-col h-full p-0 cursor-pointer"
       onClick={() => onClick?.(property)}
@@ -220,5 +222,6 @@ export function PropertyCard({ property, onClick }: { property: PropertyCardData
         </div>
       </div>
     </Card>
+    </Link>
   )
 }
