@@ -120,6 +120,26 @@ export function ContactSection() {
                 </div>
               </div>
             </Card>
+
+            {/* Owner card */}
+            <Card className="p-5 flex items-center gap-4 border-[#c9a84c]/20">
+              <img
+                src="/mohammad-mosa-ali-profile.jpg"
+                alt="Mohammad Mosa Ali"
+                className="w-14 h-14 rounded-full object-cover ring-2 ring-[#c9a84c]/30 flex-shrink-0"
+              />
+              <div>
+                <div className="font-bold text-sm">Mohammad Mosa Ali</div>
+                <div className="text-xs text-muted-foreground">
+                  {locale === "ar"
+                    ? "مؤسس ومدير — العين العقارية"
+                    : "Founder & Director — Al Ain Real Estate"}
+                </div>
+                <div className="text-xs text-[#c9a84c] font-medium mt-0.5" dir="ltr">
+                  {SITE_CONFIG.phoneDisplay}
+                </div>
+              </div>
+            </Card>
           </div>
 
           {/* Right — form */}
