@@ -5,6 +5,7 @@ import { useI18n } from "@/i18n/provider"
 import { AL_AIN_AREAS } from "@/lib/site-config"
 import { MapPin } from "lucide-react"
 import { SectionHeader } from "./section-header"
+import Link from "next/link"
 
 export function PopularAreas({ propertyCounts }: { propertyCounts: Record<string, number> }) {
   const { t, locale } = useI18n()
@@ -21,14 +22,10 @@ export function PopularAreas({ propertyCounts }: { propertyCounts: Record<string
           {AL_AIN_AREAS.map(area => {
             const count = propertyCounts[area.value] || 0
             return (
-              <Card
-                key={area.value}
-                className="relative overflow-hidden card-hover group cursor-pointer p-0 border-0"
-                onClick={() => {
-                  window.dispatchEvent(new CustomEvent("filter-by-area", { detail: area.value }))
-                  document.getElementById("search")?.scrollIntoView({ behavior: "smooth" })
-                }}
-              >
+              <Link key={area.value} href={`/areas/${area.value}`}>
+                <Card
+                  className="relative overflow-hidden card-hover group cursor-pointer p-0 border-0"
+                >
                 <div className="aspect-[16/10] relative">
                   <img
                     src={getAreaImage(area.value)}
@@ -50,7 +47,8 @@ export function PopularAreas({ propertyCounts }: { propertyCounts: Record<string
                     </p>
                   </div>
                 </div>
-              </Card>
+                </Card>
+              </Link>
             )
           })}
         </div>
