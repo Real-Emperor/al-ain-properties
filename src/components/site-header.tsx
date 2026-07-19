@@ -7,6 +7,7 @@ import { useI18n } from "@/i18n/provider"
 import { useTheme } from "next-themes"
 import { SITE_CONFIG, getTelLink } from "@/lib/site-config"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
 
 // Smooth scroll helper
 function scrollToId(id: string) {
@@ -32,13 +33,12 @@ export function SiteHeader() {
   }, [])
 
   const navItems = [
-    { id: "home", label: t("common.nav.home") },
-    { id: "search", label: t("common.nav.search") },
-    { id: "categories", label: t("common.nav.categories") },
-    { id: "areas", label: t("common.nav.areas") },
-    { id: "news", label: t("common.nav.news") },
-    { id: "about", label: t("common.nav.about") },
-    { id: "contact", label: t("common.nav.contact") },
+    { href: "/", label: t("common.nav.home") },
+    { href: "/properties", label: t("common.nav.search") },
+    { href: "/areas", label: t("common.nav.areas") },
+    { href: "/news", label: t("common.nav.news") },
+    { href: "/about", label: t("common.nav.about") },
+    { href: "/contact", label: t("common.nav.contact") },
   ]
 
   return (
@@ -77,13 +77,13 @@ export function SiteHeader() {
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-1">
             {navItems.map(item => (
-              <button
-                key={item.id}
-                onClick={() => scrollToId(item.id)}
+              <Link
+                key={item.href}
+                href={item.href}
                 className="px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground animated-underline transition-colors"
               >
                 {item.label}
-              </button>
+              </Link>
             ))}
           </nav>
 
@@ -146,16 +146,14 @@ export function SiteHeader() {
         {mobileOpen && (
           <nav className="lg:hidden border-t border-border py-4 space-y-1">
             {navItems.map(item => (
-              <button
-                key={item.id}
-                onClick={() => {
-                  scrollToId(item.id)
-                  setMobileOpen(false)
-                }}
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setMobileOpen(false)}
                 className="block w-full text-start px-3 py-2.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted rounded-md transition-colors"
               >
                 {item.label}
-              </button>
+              </Link>
             ))}
             <a href={getTelLink()} className="block px-3 pt-2">
               <Button variant="outline" className="w-full border-accent text-accent">
