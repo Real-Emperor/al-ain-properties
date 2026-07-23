@@ -58,11 +58,11 @@ export function SiteFooter() {
           <div>
             <h3 className="font-semibold text-[#c9a84c] mb-4">{t("common.footer.quickLinks")}</h3>
             <ul className="space-y-2 text-sm text-white/70">
-              <li><a href="#home" className="hover:text-[#c9a84c] transition-colors">{t("common.nav.home")}</a></li>
-              <li><a href="#search" className="hover:text-[#c9a84c] transition-colors">{t("common.nav.search")}</a></li>
-              <li><a href="#about" className="hover:text-[#c9a84c] transition-colors">{t("common.nav.about")}</a></li>
-              <li><a href="#news" className="hover:text-[#c9a84c] transition-colors">{t("common.nav.news")}</a></li>
-              <li><a href="#contact" className="hover:text-[#c9a84c] transition-colors">{t("common.nav.contact")}</a></li>
+              <li><a href="/" className="hover:text-[#c9a84c] transition-colors">{t("common.nav.home")}</a></li>
+              <li><a href="/properties" className="hover:text-[#c9a84c] transition-colors">{t("common.nav.search")}</a></li>
+              <li><a href="/about" className="hover:text-[#c9a84c] transition-colors">{t("common.nav.about")}</a></li>
+              <li><a href="/news" className="hover:text-[#c9a84c] transition-colors">{t("common.nav.news")}</a></li>
+              <li><a href="/contact" className="hover:text-[#c9a84c] transition-colors">{t("common.nav.contact")}</a></li>
             </ul>
           </div>
 
@@ -71,7 +71,7 @@ export function SiteFooter() {
             <h3 className="font-semibold text-[#c9a84c] mb-4">{t("common.footer.areas")}</h3>
             <div className="grid grid-cols-2 gap-x-3 gap-y-1.5 text-sm text-white/70">
               {AL_AIN_AREAS.map(area => (
-                <a key={area.value} href="#areas" className="hover:text-[#c9a84c] transition-colors truncate">
+                <a key={area.value} href={`/areas/${area.value}`} className="hover:text-[#c9a84c] transition-colors truncate">
                   {locale === "ar" ? area.labelAr : area.labelEn}
                 </a>
               ))}
