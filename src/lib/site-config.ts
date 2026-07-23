@@ -163,4 +163,3 @@ export function getWhatsAppLink(message: string = ""): string {
 export function getTelLink(): string {
   return `tel:${SITE_CONFIG.phoneTel}`
 }
-// Force rebuild Thu Jul 23 17:59:50 UTC 2026
