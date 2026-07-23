@@ -20,7 +20,6 @@ export function HeroSection() {
     if (typeof document !== "undefined") {
       const el = document.getElementById("search")
       if (el) el.scrollIntoView({ behavior: "smooth" })
-      // Dispatch event so search section picks up the filters
       window.dispatchEvent(new CustomEvent("hero-search", {
         detail: { area, type, listingType, minPrice, maxPrice }
       }))
@@ -28,19 +27,20 @@ export function HeroSection() {
   }
 
   return (
-    <section id="home" className="relative min-h-[90vh] flex items-center overflow-hidden">
-      {/* Background image — Al Ain themed (mountains + greenery) */}
+    <section id="home" className="relative min-h-[80vh] md:min-h-[90vh] flex items-center overflow-hidden">
+      {/* Background image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=1920&q=80"
-          alt="Al Ain landscape"
+          src="/hero-image.jpg"
+          alt="Al Ain cityscape"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 hero-overlay" />
+        {/* Dark gradient overlay — stronger on left/bottom for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/50 to-black/30" />
       </div>
 
       {/* Content */}
-      <div className="container mx-auto px-4 relative z-10 py-20">
+      <div className="container mx-auto px-4 relative z-10 py-16 md:py-20">
         <div className="max-w-3xl mx-auto text-center text-white">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
@@ -50,18 +50,18 @@ export function HeroSection() {
             </span>
           </div>
 
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
             {t("home.heroTitle")}
           </h1>
-          <p className="text-base md:text-xl text-white/80 mb-8 max-w-2xl mx-auto">
+          <p className="text-sm md:text-lg text-white/90 mb-8 max-w-2xl mx-auto">
             {t("home.heroSubtitle")}
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-wrap items-center justify-center gap-3 mb-12">
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
             <Button
               size="lg"
-              onClick={() => document.getElementById("search")?.scrollIntoView({ behavior: "smooth" })}
+              onClick={onSearch}
               className="bg-[#c9a84c] hover:bg-[#b8963f] text-[#1a1a1a] font-semibold"
             >
               <Search className="h-5 w-5 me-2" />
@@ -81,98 +81,56 @@ export function HeroSection() {
         {/* Quick search bar */}
         <div className="max-w-5xl mx-auto bg-white/95 dark:bg-card/95 backdrop-blur-lg rounded-2xl shadow-2xl p-4 md:p-6">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
-            {/* Listing type */}
             <div className="md:col-span-2">
               <Select value={listingType} onValueChange={setListingType}>
-                <SelectTrigger className="h-11">
-                  <SelectValue />
-                </SelectTrigger>
+                <SelectTrigger className="h-11"><SelectValue /></SelectTrigger>
                 <SelectContent>
                   {LISTING_TYPES.map(lt => (
-                    <SelectItem key={lt.value} value={lt.value}>
-                      {locale === "ar" ? lt.labelAr : lt.labelEn}
-                    </SelectItem>
+                    <SelectItem key={lt.value} value={lt.value}>{locale === "ar" ? lt.labelAr : lt.labelEn}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
-            {/* Area */}
             <div className="md:col-span-3">
               <Select value={area} onValueChange={setArea}>
-                <SelectTrigger className="h-11">
-                  <SelectValue placeholder={t("search.locationPlaceholder")} />
-                </SelectTrigger>
+                <SelectTrigger className="h-11"><SelectValue placeholder={t("search.locationPlaceholder")} /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">{t("search.allAreas")}</SelectItem>
-                  {AL_AIN_AREAS.map(a => (
-                    <SelectItem key={a.value} value={a.value}>
-                      {locale === "ar" ? a.labelAr : a.labelEn}
-                    </SelectItem>
+                  {[...AL_AIN_AREAS].sort((a, b) => a.labelEn.localeCompare(b.labelEn)).map(a => (
+                    <SelectItem key={a.value} value={a.value}>{locale === "ar" ? a.labelAr : a.labelEn}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
-            {/* Type */}
             <div className="md:col-span-2">
               <Select value={type} onValueChange={setType}>
-                <SelectTrigger className="h-11">
-                  <SelectValue />
-                </SelectTrigger>
+                <SelectTrigger className="h-11"><SelectValue /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">{t("search.allTypes")}</SelectItem>
                   {PROPERTY_TYPES.map(p => (
-                    <SelectItem key={p.value} value={p.value}>
-                      {p.icon} {locale === "ar" ? p.labelAr : p.labelEn}
-                    </SelectItem>
+                    <SelectItem key={p.value} value={p.value}>{p.icon} {locale === "ar" ? p.labelAr : p.labelEn}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
-            {/* Min price */}
             <div className="md:col-span-2">
-              <Input
-                type="number"
-                placeholder={t("search.minPrice")}
-                value={minPrice}
-                onChange={e => setMinPrice(e.target.value)}
-                className="h-11"
-              />
+              <Input type="number" placeholder={t("search.minPrice")} value={minPrice} onChange={e => setMinPrice(e.target.value)} className="h-11" />
             </div>
-            {/* Max price */}
             <div className="md:col-span-2">
-              <Input
-                type="number"
-                placeholder={t("search.maxPrice")}
-                value={maxPrice}
-                onChange={e => setMaxPrice(e.target.value)}
-                className="h-11"
-              />
+              <Input type="number" placeholder={t("search.maxPrice")} value={maxPrice} onChange={e => setMaxPrice(e.target.value)} className="h-11" />
             </div>
-            {/* Search button */}
             <div className="md:col-span-1">
-              <Button
-                onClick={onSearch}
-                className="h-11 w-full bg-[#1e3a8a] hover:bg-[#1e3a8a]/90 text-white"
-              >
+              <Button onClick={onSearch} className="h-11 w-full bg-[#1e3a8a] hover:bg-[#1e3a8a]/90 text-white">
                 <Search className="h-5 w-5" />
               </Button>
             </div>
           </div>
 
-          {/* Quick stats */}
           <div className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
-            <span className="flex items-center gap-1">
-              <Home className="h-3.5 w-3.5 text-[#c9a84c]" /> 9 {locale === "ar" ? "مناطق" : "areas"}
-            </span>
-            <span className="flex items-center gap-1">
-              <Building className="h-3.5 w-3.5 text-[#c9a84c]" /> 7 {locale === "ar" ? "أنواع عقارات" : "property types"}
-            </span>
-            <span className="flex items-center gap-1">
-              <Store className="h-3.5 w-3.5 text-[#c9a84c]" /> {locale === "ar" ? "إيجار وبيع" : "Rent & Sale"}
-            </span>
-            <span className="flex items-center gap-1">
-              <Warehouse className="h-3.5 w-3.5 text-[#c9a84c]" /> {locale === "ar" ? "بأسعار مناسبة" : "Affordable prices"}
-            </span>
+            <span className="flex items-center gap-1"><Home className="h-3.5 w-3.5 text-[#c9a84c]" /> 49 {locale === "ar" ? "مناطق" : "areas"}</span>
+            <span className="flex items-center gap-1"><Building className="h-3.5 w-3.5 text-[#c9a84c]" /> 8 {locale === "ar" ? "أنواع عقارات" : "property types"}</span>
+            <span className="flex items-center gap-1"><Store className="h-3.5 w-3.5 text-[#c9a84c]" /> {locale === "ar" ? "إيجار وبيع" : "Rent & Sale"}</span>
+            <span className="flex items-center gap-1"><Warehouse className="h-3.5 w-3.5 text-[#c9a84c]" /> {locale === "ar" ? "بأسعار مناسبة" : "Affordable prices"}</span>
           </div>
         </div>
       </div>
