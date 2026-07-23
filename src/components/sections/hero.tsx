@@ -29,11 +29,11 @@ export function HeroSection() {
 
   return (
     <section id="home" className="relative min-h-[90vh] flex items-center overflow-hidden">
-      {/* Background image — Al Ain themed (mountains + greenery) */}
+      {/* Background image — Al Ain cityscape */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=1920&q=80"
-          alt="Al Ain landscape"
+          src="/hero-image.jpg"
+          alt="Al Ain cityscape"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 hero-overlay" />
