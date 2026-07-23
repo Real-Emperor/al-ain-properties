@@ -126,3 +126,15 @@ model SiteSetting {
   key   String @unique
   value String
 }
+
+// ─── Area Cover Photos (admin uploads custom photo per area) ───
+model AreaCover {
+  id        String   @id @default(cuid())
+  areaValue String   @unique  // e.g. "al-jimi", "zakher" — matches AL_AIN_AREAS value
+  coverImage String  // base64 compressed image or URL
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  @@index([areaValue])
+  @@map("area_covers")
+}

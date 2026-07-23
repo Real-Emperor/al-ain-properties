@@ -6,9 +6,20 @@ import { AL_AIN_AREAS } from "@/lib/site-config"
 import { MapPin } from "lucide-react"
 import { SectionHeader } from "./section-header"
 import Link from "next/link"
+import { useState, useEffect } from "react"
 
 export function PopularAreas({ propertyCounts }: { propertyCounts: Record<string, number> }) {
   const { t, locale } = useI18n()
+  const [customCovers, setCustomCovers] = useState<Record<string, string>>({})
+
+  useEffect(() => {
+    fetch("/api/areas")
+      .then(r => r.json())
+      .then(data => {
+        if (data.covers) setCustomCovers(data.covers)
+      })
+      .catch(() => {})
+  }, [])
 
   return (
     <section id="areas" className="py-16 md:py-24">
@@ -21,13 +32,13 @@ export function PopularAreas({ propertyCounts }: { propertyCounts: Record<string
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mt-10">
           {[...AL_AIN_AREAS].sort((a, b) => a.labelEn.localeCompare(b.labelEn)).map(area => {
             const count = propertyCounts[area.value] || 0
+            const imageUrl = customCovers[area.value] || getAreaImage(area.value)
             return (
               <Link key={area.value} href={`/areas/${area.value}`}>
                 <Card className="relative overflow-hidden card-hover group cursor-pointer p-0 border-0">
-                  {/* Fixed 1:1 square aspect ratio — symmetrical across all areas */}
                   <div className="aspect-square relative">
                     <img
-                      src={getAreaImage(area.value)}
+                      src={imageUrl}
                       alt={locale === "ar" ? area.labelAr : area.labelEn}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                       loading="lazy"
@@ -56,7 +67,7 @@ export function PopularAreas({ propertyCounts }: { propertyCounts: Record<string
   )
 }
 
-// Unique photo for every Al Ain area — 49 distinct images
+// Fallback images (used when admin hasn't uploaded a custom photo)
 function getAreaImage(area: string): string {
   const images: Record<string, string> = {
     "al-jimi": "https://images.unsplash.com/photo-1567521464027-f127ff144326?w=600&h=600&fit=crop&q=80",

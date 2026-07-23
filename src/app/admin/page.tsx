@@ -7,15 +7,16 @@ import { Label } from "@/components/ui/label"
 import { Card } from "@/components/ui/card"
 import { useI18n } from "@/i18n/provider"
 import { SITE_CONFIG } from "@/lib/site-config"
-import { Building2, LogOut, LayoutDashboard, Building, MessageSquare, Calendar, Newspaper, Lock } from "lucide-react"
+import { Building2, LogOut, LayoutDashboard, Building, MessageSquare, Calendar, Newspaper, Lock, MapPin } from "lucide-react"
 import { AdminOverview } from "@/components/admin/overview"
 import { AdminProperties } from "@/components/admin/properties"
 import { AdminInquiries } from "@/components/admin/inquiries"
 import { AdminViewings } from "@/components/admin/viewings"
 import { AdminNews } from "@/components/admin/news"
+import { AdminAreas } from "@/components/admin/areas"
 import { toast } from "sonner"
 
-type AdminView = "overview" | "properties" | "inquiries" | "viewings" | "news"
+type AdminView = "overview" | "properties" | "inquiries" | "viewings" | "news" | "areas"
 
 export default function AdminPage() {
   const { t, locale } = useI18n()
@@ -127,6 +128,7 @@ export default function AdminPage() {
     { value: "inquiries", icon: MessageSquare, label: t("admin.dashboard.inquiries") },
     { value: "viewings", icon: Calendar, label: t("admin.dashboard.viewings") },
     { value: "news", icon: Newspaper, label: t("admin.dashboard.news") },
+    { value: "areas", icon: MapPin, label: locale === "ar" ? "صور المناطق" : "Area Photos" },
   ]
 
   return (
@@ -183,6 +185,7 @@ export default function AdminPage() {
         {view === "inquiries" && <AdminInquiries />}
         {view === "viewings" && <AdminViewings />}
         {view === "news" && <AdminNews />}
+        {view === "areas" && <AdminAreas />}
       </main>
     </div>
   )
