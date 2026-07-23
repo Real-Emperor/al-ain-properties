@@ -110,4 +110,4 @@ function getAreaImage(area: string): string {
     "al-bawadi": "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=600&fit=crop&q=80",
   }
   return images[area] || images["al-jimi"]
-}}
+}
