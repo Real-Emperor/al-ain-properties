@@ -21,13 +21,46 @@ export default function PropertiesPage() {
     minPrice: "", maxPrice: "", bedrooms: "any",
   })
   const [visibleCount, setVisibleCount] = useState(9)
+  const [areas, setAreas] = useState<Array<{ value: string; labelEn: string; labelAr: string }>>([])
 
   useEffect(() => {
     fetch("/api/properties")
       .then(r => r.json())
       .then(data => { setProperties(data.properties || []); setLoading(false) })
       .catch(() => setLoading(false))
+
+    // Fetch visible areas (built-in + custom, excluding hidden)
+    fetch("/api/areas")
+      .then(r => r.json())
+      .then(data => {
+        if (data.areas && data.areas.length > 0) {
+          setAreas(data.areas.map((a: any) => ({
+            value: a.value,
+            labelEn: a.labelEn,
+            labelAr: a.labelAr,
+          })))
+        } else {
+          setAreas(AL_AIN_AREAS.map(a => ({
+            value: a.value,
+            labelEn: a.labelEn,
+            labelAr: a.labelAr,
+          })))
+        }
+      })
+      .catch(() => {
+        setAreas(AL_AIN_AREAS.map(a => ({
+          value: a.value,
+          labelEn: a.labelEn,
+          labelAr: a.labelAr,
+        })))
+      })
   }, [])
+
+  // Sort areas by current locale
+  const sortedAreas = [...areas].sort((a, b) => {
+    if (locale === "ar") return a.labelAr.localeCompare(b.labelAr, "ar")
+    return a.labelEn.localeCompare(b.labelEn)
+  })
 
   const filtered = properties.filter(p => {
     if (filters.area !== "all" && p.area !== filters.area) return false
@@ -62,7 +95,7 @@ export default function PropertiesPage() {
             <SelectTrigger className="w-40 h-9 text-sm"><SelectValue placeholder={t("search.location")} /></SelectTrigger>
             <SelectContent>
               <SelectItem value="all">{t("search.allAreas")}</SelectItem>
-              {[...AL_AIN_AREAS].sort((a, b) => locale === "ar" ? a.labelAr.localeCompare(b.labelAr, "ar") : a.labelEn.localeCompare(b.labelEn)).map(a => <SelectItem key={a.value} value={a.value}>{locale === "ar" ? a.labelAr : a.labelEn}</SelectItem>)}
+              {sortedAreas.map(a => <SelectItem key={a.value} value={a.value}>{locale === "ar" ? a.labelAr : a.labelEn}</SelectItem>)}
             </SelectContent>
           </Select>
           <Select value={filters.type} onValueChange={v => setFilters({ ...filters, type: v })}>

@@ -53,6 +53,7 @@ export function PropertyDetailsModal({
   const [currentPhoto, setCurrentPhoto] = useState(0)
   const [bookingOpen, setBookingOpen] = useState(false)
   const [isFav, setIsFav] = useState(false)
+  const [areaLabel, setAreaLabel] = useState<string | null>(null)
 
   useEffect(() => {
     if (property) {
@@ -64,8 +65,22 @@ export function PropertyDetailsModal({
           setIsFav(favs.includes(property.id))
         } catch {}
       }
+      // Look up area label — first built-in, then via API (for custom areas)
+      const builtIn = getAreaByValue(property.area)
+      if (builtIn) {
+        setAreaLabel(locale === "ar" ? builtIn.labelAr : builtIn.labelEn)
+      } else {
+        setAreaLabel(null)
+        fetch("/api/areas")
+          .then(r => r.json())
+          .then(data => {
+            const found = (data.areas || []).find((a: any) => a.value === property.area)
+            setAreaLabel(found ? (locale === "ar" ? found.labelAr : found.labelEn) : property.area)
+          })
+          .catch(() => setAreaLabel(property.area))
+      }
     }
-  }, [property])
+  }, [property, locale])
 
   if (!property) return null
 
@@ -87,7 +102,6 @@ export function PropertyDetailsModal({
     }
   })()
 
-  const area = getAreaByValue(property.area)
   const type = getTypeByValue(property.type)
 
   const toggleFav = () => {
@@ -117,8 +131,8 @@ export function PropertyDetailsModal({
   }
 
   const inquiryMessage = locale === "ar"
-    ? `مرحباً، أنا مهتم بهذا العقار: ${property.titleAr}\nالسعر: ${formatPrice(property.price, "ar")}\nالمنطقة: ${area?.labelAr || property.area}\n`
-    : `Hello, I'm interested in this property: ${property.titleEn}\nPrice: ${formatPrice(property.price, "en")}\nArea: ${area?.labelEn || property.area}\n`
+    ? `مرحباً، أنا مهتم بهذا العقار: ${property.titleAr}\nالسعر: ${formatPrice(property.price, "ar")}\nالمنطقة: ${areaLabel || property.area}\n`
+    : `Hello, I'm interested in this property: ${property.titleEn}\nPrice: ${formatPrice(property.price, "en")}\nArea: ${areaLabel || property.area}\n`
 
   const nextPhoto = () => setCurrentPhoto(p => (p + 1) % photos.length)
   const prevPhoto = () => setCurrentPhoto(p => (p - 1 + photos.length) % photos.length)
@@ -207,7 +221,7 @@ export function PropertyDetailsModal({
               <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
                 <span className="flex items-center gap-1">
                   <MapPin className="h-4 w-4 text-[#c9a84c]" />
-                  {area ? (locale === "ar" ? area.labelAr : area.labelEn) : property.area}
+                  {areaLabel || property.area}
                 </span>
                 <span className="flex items-center gap-1">
                   <Eye className="h-4 w-4 text-[#c9a84c]" />
@@ -278,9 +292,9 @@ export function PropertyDetailsModal({
               <div className="text-sm text-foreground/80">
                 {property.addressEn || property.addressAr
                   ? (locale === "ar" ? property.addressAr : property.addressEn)
-                  : (area ? (locale === "ar" ? area.labelAr : area.labelEn) : property.area)
+                  : (areaLabel || property.area)
                 }
-                {area && `, ${locale === "ar" ? "العين" : "Al Ain"}`}
+                {areaLabel && `, ${locale === "ar" ? "العين" : "Al Ain"}`}
               </div>
               {property.latitude && property.longitude && (
                 <div className="mt-3 aspect-[16/9] rounded-lg overflow-hidden bg-muted relative">

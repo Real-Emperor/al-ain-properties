@@ -50,6 +50,28 @@ export function PropertyCard({ property, onClick }: { property: PropertyCardData
   const { t, locale } = useI18n()
   const [isFav, setIsFav] = useState(false)
   const [inCompare, setInCompare] = useState(false)
+  const [areaLabel, setAreaLabel] = useState<string | null>(null)
+
+  useEffect(() => {
+    // First check built-in areas (instant)
+    const builtIn = getAreaByValue(property.area)
+    if (builtIn) {
+      setAreaLabel(locale === "ar" ? builtIn.labelAr : builtIn.labelEn)
+      return
+    }
+    // Not a built-in area — fetch from API (for custom areas)
+    fetch("/api/areas")
+      .then(r => r.json())
+      .then(data => {
+        const found = (data.areas || []).find((a: any) => a.value === property.area)
+        if (found) {
+          setAreaLabel(locale === "ar" ? found.labelAr : found.labelEn)
+        } else {
+          setAreaLabel(property.area) // fallback to raw value
+        }
+      })
+      .catch(() => setAreaLabel(property.area))
+  }, [property.area, locale])
 
   useEffect(() => {
     if (typeof window === "undefined") return
@@ -61,7 +83,6 @@ export function PropertyCard({ property, onClick }: { property: PropertyCardData
     } catch {}
   }, [property.id])
 
-  const area = getAreaByValue(property.area)
   const type = getTypeByValue(property.type)
   const photos = safeParsePhotos(property.photos)
   const coverPhoto = photos[0] || "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80"
@@ -174,7 +195,7 @@ export function PropertyCard({ property, onClick }: { property: PropertyCardData
         </h3>
         <div className="flex items-center gap-1 text-xs text-muted-foreground mb-3">
           <MapPin className="h-3 w-3 text-[#c9a84c]" />
-          <span>{area ? (locale === "ar" ? area.labelAr : area.labelEn) : property.area}</span>
+          <span>{areaLabel || property.area}</span>
         </div>
 
         {/* Specs */}

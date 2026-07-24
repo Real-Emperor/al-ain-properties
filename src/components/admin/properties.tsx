@@ -21,6 +21,7 @@ export function AdminProperties() {
   const [loading, setLoading] = useState(true)
   const [editing, setEditing] = useState<any | null>(null)
   const [dialogOpen, setDialogOpen] = useState(false)
+  const [areas, setAreas] = useState<Array<{ value: string; labelEn: string; labelAr: string }>>([])
 
   const fetchProperties = async () => {
     const token = localStorage.getItem("admin_token")
@@ -34,7 +35,43 @@ export function AdminProperties() {
     setLoading(false)
   }
 
-  useEffect(() => { fetchProperties() }, [])
+  // Fetch all visible areas (built-in + custom, excluding hidden) for the area dropdown
+  const fetchAreas = async () => {
+    try {
+      const res = await fetch("/api/areas")
+      const data = await res.json()
+      if (data.areas && data.areas.length > 0) {
+        setAreas(data.areas.map((a: any) => ({
+          value: a.value,
+          labelEn: a.labelEn,
+          labelAr: a.labelAr,
+        })))
+      } else {
+        setAreas(AL_AIN_AREAS.map(a => ({
+          value: a.value,
+          labelEn: a.labelEn,
+          labelAr: a.labelAr,
+        })))
+      }
+    } catch {
+      setAreas(AL_AIN_AREAS.map(a => ({
+        value: a.value,
+        labelEn: a.labelEn,
+        labelAr: a.labelAr,
+      })))
+    }
+  }
+
+  useEffect(() => {
+    fetchProperties()
+    fetchAreas()
+  }, [])
+
+  // Sort areas by current locale
+  const sortedAreas = [...areas].sort((a, b) => {
+    if (locale === "ar") return a.labelAr.localeCompare(b.labelAr, "ar")
+    return a.labelEn.localeCompare(b.labelEn)
+  })
 
   const openNew = () => {
     setEditing({
@@ -174,7 +211,8 @@ export function AdminProperties() {
       {/* Properties list */}
       <div className="space-y-2">
         {properties.map(p => {
-          const area = getAreaByValue(p.area)
+          // Look up area in fetched areas list first (includes custom areas), then fall back to built-in
+          const area = areas.find(a => a.value === p.area) || getAreaByValue(p.area)
           const type = getTypeByValue(p.type)
           const photos = (() => { try { return JSON.parse(p.photos || "[]") } catch { return [] } })()
           return (
@@ -270,7 +308,7 @@ export function AdminProperties() {
                 <Select value={editing.area} onValueChange={v => setEditing({ ...editing, area: v })}>
                   <SelectTrigger className="mt-1"><SelectValue /></SelectTrigger>
                   <SelectContent>
-                    {AL_AIN_AREAS.map(a => (
+                    {sortedAreas.map(a => (
                       <SelectItem key={a.value} value={a.value}>{locale === "ar" ? a.labelAr : a.labelEn}</SelectItem>
                     ))}
                   </SelectContent>

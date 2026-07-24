@@ -327,8 +327,8 @@ export function AdminAreas() {
               )}
             </div>
 
-            <div className="flex gap-1">
-              <label className="flex-1">
+            <div className="flex flex-wrap gap-1">
+              <label className="flex-1 min-w-[80px]">
                 <input type="file" accept="image/*" className="hidden"
                   onChange={(e) => { const f = e.target.files?.[0]; if (f) handleUpload(area, f) }} />
                 <Button type="button" variant="outline" size="sm" className="w-full" disabled={uploading === area.value} asChild>
@@ -340,25 +340,27 @@ export function AdminAreas() {
               </label>
               <Button
                 type="button"
-                variant="ghost"
+                variant="outline"
                 size="sm"
                 title={area.hidden ? (locale === "ar" ? "إظهار" : "Show") : (locale === "ar" ? "إخفاء" : "Hide")}
                 onClick={() => handleToggleHidden(area)}
               >
-                {area.hidden ? <Eye className="h-3 w-3" /> : <EyeOff className="h-3 w-3" />}
+                {area.hidden ? <Eye className="h-3 w-3 me-1" /> : <EyeOff className="h-3 w-3 me-1" />}
+                <span className="text-xs">{area.hidden ? (locale === "ar" ? "إظهار" : "Show") : (locale === "ar" ? "إخفاء" : "Hide")}</span>
               </Button>
-              {(area.coverImage || area.isCustom) && (
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  className="text-red-500 hover:text-red-600"
-                  title={area.isCustom ? (locale === "ar" ? "حذف نهائي" : "Delete permanently") : (locale === "ar" ? "حذف الصورة" : "Remove photo")}
-                  onClick={() => handleDelete(area)}
-                >
-                  <Trash2 className="h-3 w-3" />
-                </Button>
-              )}
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                className="text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950/30 border-red-200 dark:border-red-900/50"
+                title={area.isCustom
+                  ? (locale === "ar" ? "حذف المنطقة نهائياً" : "Delete area permanently")
+                  : (locale === "ar" ? "حذف الصورة وإعادة التعيين" : "Remove photo & reset")}
+                onClick={() => handleDelete(area)}
+              >
+                <Trash2 className="h-3 w-3 me-1" />
+                <span className="text-xs">{locale === "ar" ? "حذف" : "Delete"}</span>
+              </Button>
             </div>
           </Card>
         ))}
