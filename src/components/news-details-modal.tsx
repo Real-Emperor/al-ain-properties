@@ -51,10 +51,10 @@ export function NewsDetailsModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-3xl max-h-[95vh] overflow-y-auto p-0">
-        {/* Cover image */}
+      <DialogContent className="max-w-3xl max-h-[95vh] overflow-y-auto p-0 gap-0">
+        {/* Cover image — full width, no padding, sits above the content */}
         {article.coverImage && (
-          <div className="aspect-[16/9] overflow-hidden bg-muted">
+          <div className="aspect-[16/9] w-full overflow-hidden bg-muted flex-shrink-0">
             <img
               src={article.coverImage}
               alt={locale === "ar" ? article.titleAr : article.titleEn}
@@ -63,7 +63,8 @@ export function NewsDetailsModal({
           </div>
         )}
 
-        <div className="p-6 md:p-8">
+        {/* Content section — solid background, clear separation from image */}
+        <div className="bg-background p-6 md:p-8">
           <DialogHeader className="p-0 space-y-0 mb-4">
             <div className="flex flex-wrap items-center gap-2 mb-3">
               <Badge className="bg-[#c9a84c]/15 text-[#c9a84c] hover:bg-[#c9a84c]/20 border-0">
