@@ -22,19 +22,13 @@ export default function HomePage() {
   const [stats, setStats] = useState<any>(null)
   const [selectedProperty, setSelectedProperty] = useState<any | null>(null)
   const [detailsOpen, setDetailsOpen] = useState(false)
-  const [loading, setLoading] = useState(true)
 
+  // Fetch data in the background — render the page immediately with empty states
+  // and let the sections populate as data arrives. This eliminates the loading
+  // spinner and makes the page feel instant.
   useEffect(() => {
-    // Only ensure admin user exists (no auto-seed of demo data)
-    const ensureAdmin = async () => {
-      try {
-        await fetch("/api/seed", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({}) })
-      } catch {}
-    }
-
     const fetchData = async () => {
       try {
-        await ensureAdmin()
         const [propsRes, newsRes, statsRes] = await Promise.all([
           fetch("/api/properties"),
           fetch("/api/news"),
@@ -49,7 +43,6 @@ export default function HomePage() {
       } catch (e) {
         console.error("Failed to fetch data:", e)
       }
-      setLoading(false)
     }
     fetchData()
   }, [])
@@ -57,17 +50,6 @@ export default function HomePage() {
   const openProperty = (p: PropertyCardData) => {
     setSelectedProperty(p)
     setDetailsOpen(true)
-  }
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#c9a84c] mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading Al Ain Real Estate...</p>
-        </div>
-      </div>
-    )
   }
 
   return (
@@ -78,10 +60,10 @@ export default function HomePage() {
         <SearchSection properties={properties} onPropertyClick={openProperty} />
         <FeaturedProperties properties={properties} onPropertyClick={openProperty} />
         <PopularAreas propertyCounts={stats?.propertyCountsByArea || {}} />
-        <CategoriesSection propertyCounts={stats?.propertyCountsByCategory || {}} />
-        <AboutSection />
+        <CategoriesSection stats={stats} onPropertyClick={openProperty} />
         <NewsSection articles={articles} />
         <TestimonialsSection />
+        <AboutSection />
         <ContactSection />
       </main>
       <SiteFooter />

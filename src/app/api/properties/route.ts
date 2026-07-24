@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db"
 
-export const dynamic = "force-dynamic"
+// Cache for 5 minutes (properties don't change frequently)
+export const revalidate = 300
+export const dynamic = "force-static"
 
 // GET /api/properties - list all properties (with optional filters)
 export async function GET(request: NextRequest) {
@@ -26,7 +28,9 @@ export async function GET(request: NextRequest) {
       take: limit ? Number(limit) : undefined,
     })
 
-    return NextResponse.json({ properties })
+    const response = NextResponse.json({ properties })
+    response.headers.set("Cache-Control", "public, s-maxage=300, stale-while-revalidate=3600")
+    return response
   } catch (error) {
     console.error("GET /api/properties error:", error)
     return NextResponse.json({ error: "Failed to fetch properties" }, { status: 500 })

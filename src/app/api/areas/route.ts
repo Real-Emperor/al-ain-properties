@@ -2,9 +2,13 @@ import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db"
 import { AL_AIN_AREAS } from "@/lib/site-config"
 
-export const dynamic = "force-dynamic"
+// Cache for 1 hour, allow stale-while-revalidate for 1 day
+export const revalidate = 3600 // 1 hour in seconds
+export const dynamic = "force-static"
 
 // GET /api/areas - returns all visible areas (built-in + custom) with cover photos
+// This endpoint is cached for 1 hour to avoid repeated DB queries on every page load.
+// The cache is automatically invalidated when the file is redeployed.
 export async function GET() {
   try {
     const [covers, customs] = await Promise.all([
@@ -42,11 +46,14 @@ export async function GET() {
     const allAreas = [...builtInAreas, ...customAreas]
 
     // Return covers map for backward compat + full areas list
-    return NextResponse.json({
+    const response = NextResponse.json({
       covers: coverMap,
       areas: allAreas,
       hiddenAreas: Array.from(hiddenSet),
     })
+    // Cache at CDN level for 1 hour
+    response.headers.set("Cache-Control", "public, s-maxage=3600, stale-while-revalidate=86400")
+    return response
   } catch (error) {
     console.error("GET /api/areas error:", error)
     return NextResponse.json({ covers: {}, areas: [], hiddenAreas: [] })

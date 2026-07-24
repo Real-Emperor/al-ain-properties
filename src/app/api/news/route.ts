@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db"
 
-export const dynamic = "force-dynamic"
+// Cache for 10 minutes (news changes infrequently)
+export const revalidate = 600
+export const dynamic = "force-static"
 
 // GET /api/news - list news articles
 export async function GET(request: NextRequest) {
@@ -19,7 +21,9 @@ export async function GET(request: NextRequest) {
       take: limit ? Number(limit) : undefined,
     })
 
-    return NextResponse.json({ articles })
+    const response = NextResponse.json({ articles })
+    response.headers.set("Cache-Control", "public, s-maxage=600, stale-while-revalidate=3600")
+    return response
   } catch (error) {
     console.error("GET /api/news error:", error)
     return NextResponse.json({ error: "Failed to fetch news" }, { status: 500 })
