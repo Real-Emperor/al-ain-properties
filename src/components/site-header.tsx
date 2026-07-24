@@ -56,7 +56,7 @@ export function SiteHeader() {
           <button
             onClick={() => scrollToId("home")}
             className="flex items-center gap-2 group"
-            aria-label="Al Ain Real Estate, Home"
+            aria-label={`${SITE_CONFIG.brandName.en}, Home`}
           >
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-br from-[#c9a84c] to-[#1e3a8a] rounded-lg blur-sm opacity-60 group-hover:opacity-100 transition-opacity" />
