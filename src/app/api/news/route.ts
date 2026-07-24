@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db"
 
 // Cache for 10 minutes (news changes infrequently)
-export const revalidate = 600
+export const revalidate = 1
 export const dynamic = "force-static"
 
 // GET /api/news - list news articles
