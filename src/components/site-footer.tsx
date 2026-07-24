@@ -70,7 +70,7 @@ export function SiteFooter() {
           <div>
             <h3 className="font-semibold text-[#c9a84c] mb-4">{t("common.footer.areas")}</h3>
             <div className="grid grid-cols-2 gap-x-3 gap-y-1.5 text-sm text-white/70">
-              {AL_AIN_AREAS.map(area => (
+              {[...AL_AIN_AREAS].sort((a, b) => locale === "ar" ? a.labelAr.localeCompare(b.labelAr, "ar") : a.labelEn.localeCompare(b.labelEn)).map(area => (
                 <a key={area.value} href={`/areas/${area.value}`} className="hover:text-[#c9a84c] transition-colors truncate">
                   {locale === "ar" ? area.labelAr : area.labelEn}
                 </a>

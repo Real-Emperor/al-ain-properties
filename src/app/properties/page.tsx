@@ -62,7 +62,7 @@ export default function PropertiesPage() {
             <SelectTrigger className="w-40 h-9 text-sm"><SelectValue placeholder={t("search.location")} /></SelectTrigger>
             <SelectContent>
               <SelectItem value="all">{t("search.allAreas")}</SelectItem>
-              {AL_AIN_AREAS.map(a => <SelectItem key={a.value} value={a.value}>{locale === "ar" ? a.labelAr : a.labelEn}</SelectItem>)}
+              {[...AL_AIN_AREAS].sort((a, b) => locale === "ar" ? a.labelAr.localeCompare(b.labelAr, "ar") : a.labelEn.localeCompare(b.labelEn)).map(a => <SelectItem key={a.value} value={a.value}>{locale === "ar" ? a.labelAr : a.labelEn}</SelectItem>)}
             </SelectContent>
           </Select>
           <Select value={filters.type} onValueChange={v => setFilters({ ...filters, type: v })}>

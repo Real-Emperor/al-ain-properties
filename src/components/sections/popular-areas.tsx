@@ -10,16 +10,29 @@ import { useState, useEffect } from "react"
 
 export function PopularAreas({ propertyCounts }: { propertyCounts: Record<string, number> }) {
   const { t, locale } = useI18n()
-  const [customCovers, setCustomCovers] = useState<Record<string, string>>({})
+  const [areaData, setAreaData] = useState<{
+    areas: Array<{ value: string; labelEn: string; labelAr: string; coverImage: string | null }>
+  }>({ areas: [] })
 
   useEffect(() => {
     fetch("/api/areas")
       .then(r => r.json())
       .then(data => {
-        if (data.covers) setCustomCovers(data.covers)
+        if (data.areas) setAreaData({ areas: data.areas })
       })
       .catch(() => {})
   }, [])
+
+  // Use API areas if available, otherwise fall back to built-in
+  const displayAreas = areaData.areas.length > 0
+    ? areaData.areas
+    : AL_AIN_AREAS.map(a => ({ value: a.value, labelEn: a.labelEn, labelAr: a.labelAr, coverImage: null }))
+
+  // Sort by current locale
+  const sortedAreas = [...displayAreas].sort((a, b) => {
+    if (locale === "ar") return a.labelAr.localeCompare(b.labelAr, "ar")
+    return a.labelEn.localeCompare(b.labelEn)
+  })
 
   return (
     <section id="areas" className="py-16 md:py-24">
@@ -30,9 +43,9 @@ export function PopularAreas({ propertyCounts }: { propertyCounts: Record<string
           centered
         />
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mt-10">
-          {[...AL_AIN_AREAS].sort((a, b) => a.labelEn.localeCompare(b.labelEn)).map(area => {
+          {sortedAreas.map(area => {
             const count = propertyCounts[area.value] || 0
-            const imageUrl = customCovers[area.value] || getAreaImage(area.value)
+            const imageUrl = area.coverImage || getAreaImage(area.value)
             return (
               <Link key={area.value} href={`/areas/${area.value}`}>
                 <Card className="relative overflow-hidden card-hover group cursor-pointer p-0 border-0">
@@ -53,7 +66,7 @@ export function PopularAreas({ propertyCounts }: { propertyCounts: Record<string
                         {locale === "ar" ? area.labelAr : area.labelEn}
                       </h3>
                       <p className="text-[10px] text-white/70">
-                        {count} {t("areas.propertiesIn").includes("في") ? "عقار" : "properties"}
+                        {count} {locale === "ar" ? "عقار" : "properties"}
                       </p>
                     </div>
                   </div>

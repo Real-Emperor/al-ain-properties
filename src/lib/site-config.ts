@@ -163,3 +163,13 @@ export function getWhatsAppLink(message: string = ""): string {
 export function getTelLink(): string {
   return `tel:${SITE_CONFIG.phoneTel}`
 }
+
+// ─── Area sorting helper (sorts by active language) ───
+export function sortAreasByLocale(areas: readonly typeof AL_AIN_AREAS[number][], locale: "en" | "ar") {
+  return [...areas].sort((a, b) => {
+    if (locale === "ar") {
+      return a.labelAr.localeCompare(b.labelAr, "ar")
+    }
+    return a.labelEn.localeCompare(b.labelEn)
+  })
+}

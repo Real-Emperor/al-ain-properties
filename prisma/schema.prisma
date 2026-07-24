@@ -130,11 +130,33 @@ model SiteSetting {
 // ─── Area Cover Photos (admin uploads custom photo per area) ───
 model AreaCover {
   id        String   @id @default(cuid())
-  areaValue String   @unique  // e.g. "al-jimi", "zakher" — matches AL_AIN_AREAS value
+  areaValue String   @unique  // e.g. "al-jimi", "zakher"
   coverImage String  // base64 compressed image or URL
+  hidden    Boolean  @default(false) // admin can hide areas
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
 
   @@index([areaValue])
+  @@index([hidden])
   @@map("area_covers")
+}
+
+
+// ─── Custom Areas (admin can add new areas) ───
+model AreaCustom {
+  id        String   @id @default(cuid())
+  areaValue String   @unique  // slug e.g. "new-area"
+  labelEn   String   // English name
+  labelAr   String   // Arabic name
+  lat       Float    @default(24.2075)
+  lng       Float    @default(55.7447)
+  coverImage String? // optional base64 image
+  hidden    Boolean  @default(false)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([hidden])
+  @@index([sortOrder])
+  @@map("area_customs")
 }

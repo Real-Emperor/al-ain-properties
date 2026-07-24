@@ -1,19 +1,54 @@
 import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db"
+import { AL_AIN_AREAS } from "@/lib/site-config"
 
 export const dynamic = "force-dynamic"
 
-// GET /api/areas — returns all area cover photos
+// GET /api/areas — returns all visible areas (built-in + custom) with cover photos
 export async function GET() {
   try {
-    const covers = await db.areaCover.findMany()
-    const map: Record<string, string> = {}
+    const [covers, customs] = await Promise.all([
+      db.areaCover.findMany(),
+      db.areaCustom.findMany({ where: { hidden: false }, orderBy: { sortOrder: "asc" } }),
+    ])
+
+    const coverMap: Record<string, string> = {}
+    const hiddenSet = new Set<string>()
     for (const c of covers) {
-      map[c.areaValue] = c.coverImage
+      if (c.coverImage) coverMap[c.areaValue] = c.coverImage
+      if (c.hidden) hiddenSet.add(c.areaValue)
     }
-    return NextResponse.json({ covers: map })
+
+    // Built-in areas (excluding hidden ones)
+    const builtInAreas = AL_AIN_AREAS
+      .filter(a => !hiddenSet.has(a.value))
+      .map(a => ({
+        value: a.value,
+        labelEn: a.labelEn,
+        labelAr: a.labelAr,
+        coverImage: coverMap[a.value] || null,
+        isCustom: false,
+      }))
+
+    // Custom areas
+    const customAreas = customs.map(a => ({
+      value: a.areaValue,
+      labelEn: a.labelEn,
+      labelAr: a.labelAr,
+      coverImage: a.coverImage || coverMap[a.areaValue] || null,
+      isCustom: true,
+    }))
+
+    const allAreas = [...builtInAreas, ...customAreas]
+
+    // Return covers map for backward compat + full areas list
+    return NextResponse.json({
+      covers: coverMap,
+      areas: allAreas,
+      hiddenAreas: Array.from(hiddenSet),
+    })
   } catch (error) {
     console.error("GET /api/areas error:", error)
-    return NextResponse.json({ covers: {} })
+    return NextResponse.json({ covers: {}, areas: [], hiddenAreas: [] })
   }
 }
