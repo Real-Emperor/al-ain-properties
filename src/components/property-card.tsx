@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { useI18n } from "@/i18n/provider"
 import { formatPrice, getAreaByValue, getTypeByValue, getWhatsAppLink } from "@/lib/site-config"
 import { useState, useEffect } from "react"
+import { useAreas } from "@/hooks/use-areas"
 import { toast } from "sonner"
 
 export interface PropertyCardData {
@@ -50,28 +51,16 @@ export function PropertyCard({ property, onClick }: { property: PropertyCardData
   const { t, locale } = useI18n()
   const [isFav, setIsFav] = useState(false)
   const [inCompare, setInCompare] = useState(false)
-  const [areaLabel, setAreaLabel] = useState<string | null>(null)
+  const apiAreas = useAreas()
 
-  useEffect(() => {
-    // First check built-in areas (instant)
-    const builtIn = getAreaByValue(property.area)
-    if (builtIn) {
-      setAreaLabel(locale === "ar" ? builtIn.labelAr : builtIn.labelEn)
-      return
-    }
-    // Not a built-in area — fetch from API (for custom areas)
-    fetch("/api/areas")
-      .then(r => r.json())
-      .then(data => {
-        const found = (data.areas || []).find((a: any) => a.value === property.area)
-        if (found) {
-          setAreaLabel(locale === "ar" ? found.labelAr : found.labelEn)
-        } else {
-          setAreaLabel(property.area) // fallback to raw value
-        }
-      })
-      .catch(() => setAreaLabel(property.area))
-  }, [property.area, locale])
+  // Compute area label: first check built-in (instant), then API areas (for custom), then fallback to raw value
+  const builtInArea = getAreaByValue(property.area)
+  const apiArea = apiAreas.find(a => a.value === property.area)
+  const areaLabel = builtInArea
+    ? (locale === "ar" ? builtInArea.labelAr : builtInArea.labelEn)
+    : apiArea
+      ? (locale === "ar" ? apiArea.labelAr : apiArea.labelEn)
+      : property.area
 
   useEffect(() => {
     if (typeof window === "undefined") return

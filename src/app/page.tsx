@@ -60,7 +60,7 @@ export default function HomePage() {
         <SearchSection properties={properties} onPropertyClick={openProperty} />
         <FeaturedProperties properties={properties} onPropertyClick={openProperty} />
         <PopularAreas propertyCounts={stats?.propertyCountsByArea || {}} />
-        <CategoriesSection stats={stats} onPropertyClick={openProperty} />
+        <CategoriesSection propertyCounts={stats?.propertyCountsByCategory || {}} />
         <NewsSection articles={articles} />
         <TestimonialsSection />
         <AboutSection />

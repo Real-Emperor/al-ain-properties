@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { useI18n } from "@/i18n/provider"
 import { AL_AIN_AREAS, PROPERTY_TYPES, LISTING_TYPES } from "@/lib/site-config"
+import { useAreas } from "@/hooks/use-areas"
 import { Search, Inbox, X } from "lucide-react"
 
 export default function PropertiesPage() {
@@ -21,39 +22,18 @@ export default function PropertiesPage() {
     minPrice: "", maxPrice: "", bedrooms: "any",
   })
   const [visibleCount, setVisibleCount] = useState(9)
-  const [areas, setAreas] = useState<Array<{ value: string; labelEn: string; labelAr: string }>>([])
+  const apiAreas = useAreas()
+
+  // Use API areas if available, otherwise fall back to built-in list
+  const areas = apiAreas.length > 0
+    ? apiAreas.map(a => ({ value: a.value, labelEn: a.labelEn, labelAr: a.labelAr }))
+    : AL_AIN_AREAS.map(a => ({ value: a.value, labelEn: a.labelEn, labelAr: a.labelAr }))
 
   useEffect(() => {
     fetch("/api/properties")
       .then(r => r.json())
       .then(data => { setProperties(data.properties || []); setLoading(false) })
       .catch(() => setLoading(false))
-
-    // Fetch visible areas (built-in + custom, excluding hidden)
-    fetch("/api/areas")
-      .then(r => r.json())
-      .then(data => {
-        if (data.areas && data.areas.length > 0) {
-          setAreas(data.areas.map((a: any) => ({
-            value: a.value,
-            labelEn: a.labelEn,
-            labelAr: a.labelAr,
-          })))
-        } else {
-          setAreas(AL_AIN_AREAS.map(a => ({
-            value: a.value,
-            labelEn: a.labelEn,
-            labelAr: a.labelAr,
-          })))
-        }
-      })
-      .catch(() => {
-        setAreas(AL_AIN_AREAS.map(a => ({
-          value: a.value,
-          labelEn: a.labelEn,
-          labelAr: a.labelAr,
-        })))
-      })
   }, [])
 
   // Sort areas by current locale

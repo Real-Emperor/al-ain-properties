@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useAreas } from "@/hooks/use-areas"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -53,7 +54,17 @@ export function PropertyDetailsModal({
   const [currentPhoto, setCurrentPhoto] = useState(0)
   const [bookingOpen, setBookingOpen] = useState(false)
   const [isFav, setIsFav] = useState(false)
-  const [areaLabel, setAreaLabel] = useState<string | null>(null)
+  const apiAreas = useAreas()
+
+  // Compute area label: first check built-in (instant), then API areas (for custom), then fallback to raw value
+  const areaLabel = property
+    ? (() => {
+        const builtIn = getAreaByValue(property.area)
+        if (builtIn) return locale === "ar" ? builtIn.labelAr : builtIn.labelEn
+        const apiArea = apiAreas.find(a => a.value === property.area)
+        return apiArea ? (locale === "ar" ? apiArea.labelAr : apiArea.labelEn) : property.area
+      })()
+    : null
 
   useEffect(() => {
     if (property) {
@@ -64,20 +75,6 @@ export function PropertyDetailsModal({
           const favs = JSON.parse(localStorage.getItem("favorites") || "[]")
           setIsFav(favs.includes(property.id))
         } catch {}
-      }
-      // Look up area label — first built-in, then via API (for custom areas)
-      const builtIn = getAreaByValue(property.area)
-      if (builtIn) {
-        setAreaLabel(locale === "ar" ? builtIn.labelAr : builtIn.labelEn)
-      } else {
-        setAreaLabel(null)
-        fetch("/api/areas")
-          .then(r => r.json())
-          .then(data => {
-            const found = (data.areas || []).find((a: any) => a.value === property.area)
-            setAreaLabel(found ? (locale === "ar" ? found.labelAr : found.labelEn) : property.area)
-          })
-          .catch(() => setAreaLabel(property.area))
       }
     }
   }, [property, locale])

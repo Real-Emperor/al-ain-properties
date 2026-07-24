@@ -3,10 +3,23 @@
 import { Building2, Phone, Mail, MapPin, Clock, Facebook, Instagram, Twitter, Linkedin, Youtube } from "lucide-react"
 import { useI18n } from "@/i18n/provider"
 import { SITE_CONFIG, getTelLink, getWhatsAppLink, AL_AIN_AREAS, PROPERTY_CATEGORIES } from "@/lib/site-config"
+import { useAreas } from "@/hooks/use-areas"
 
 export function SiteFooter() {
   const { t, locale } = useI18n()
   const year = new Date().getFullYear()
+  const apiAreas = useAreas()
+
+  // Use API areas if available, otherwise fall back to built-in list
+  const areas = apiAreas.length > 0
+    ? apiAreas
+    : AL_AIN_AREAS.map(a => ({ value: a.value, labelEn: a.labelEn, labelAr: a.labelAr, coverImage: null, isCustom: false }))
+
+  // Sort areas by current locale
+  const sortedAreas = [...areas].sort((a, b) => {
+    if (locale === "ar") return a.labelAr.localeCompare(b.labelAr, "ar")
+    return a.labelEn.localeCompare(b.labelEn)
+  })
 
   const socials = [
     { icon: Facebook, url: SITE_CONFIG.social.facebook },
@@ -70,7 +83,7 @@ export function SiteFooter() {
           <div>
             <h3 className="font-semibold text-[#c9a84c] mb-4">{t("common.footer.areas")}</h3>
             <div className="grid grid-cols-2 gap-x-3 gap-y-1.5 text-sm text-white/70">
-              {[...AL_AIN_AREAS].sort((a, b) => locale === "ar" ? a.labelAr.localeCompare(b.labelAr, "ar") : a.labelEn.localeCompare(b.labelEn)).map(area => (
+              {sortedAreas.map(area => (
                 <a key={area.value} href={`/areas/${area.value}`} className="hover:text-[#c9a84c] transition-colors truncate">
                   {locale === "ar" ? area.labelAr : area.labelEn}
                 </a>

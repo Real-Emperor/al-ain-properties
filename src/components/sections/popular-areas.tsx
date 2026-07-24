@@ -6,26 +6,15 @@ import { AL_AIN_AREAS } from "@/lib/site-config"
 import { MapPin } from "lucide-react"
 import { SectionHeader } from "./section-header"
 import Link from "next/link"
-import { useState, useEffect } from "react"
+import { useAreas } from "@/hooks/use-areas"
 
 export function PopularAreas({ propertyCounts }: { propertyCounts: Record<string, number> }) {
   const { t, locale } = useI18n()
-  const [areaData, setAreaData] = useState<{
-    areas: Array<{ value: string; labelEn: string; labelAr: string; coverImage: string | null }>
-  }>({ areas: [] })
-
-  useEffect(() => {
-    fetch("/api/areas")
-      .then(r => r.json())
-      .then(data => {
-        if (data.areas) setAreaData({ areas: data.areas })
-      })
-      .catch(() => {})
-  }, [])
+  const apiAreas = useAreas()
 
   // Use API areas if available, otherwise fall back to built-in
-  const displayAreas = areaData.areas.length > 0
-    ? areaData.areas
+  const displayAreas = apiAreas.length > 0
+    ? apiAreas
     : AL_AIN_AREAS.map(a => ({ value: a.value, labelEn: a.labelEn, labelAr: a.labelAr, coverImage: null }))
 
   // Sort by current locale
