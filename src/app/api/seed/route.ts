@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic"
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json().catch(() => ({}))
-    const adminEmail = body.adminEmail || "mohammadmosaaliali@gmail.com"
+    const adminEmail = body.adminEmail || "admin@alainproperties.ae"
     const adminPassword = body.adminPassword || "AlAin@Admin2026!Secure"
 
     const results = {
