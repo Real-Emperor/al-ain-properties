@@ -125,7 +125,7 @@ export function SiteHeader() {
                 className="hidden md:flex items-center gap-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground"
               >
                 <Phone className="h-4 w-4" />
-                <span className="text-xs font-semibold">{SITE_CONFIG.phoneDisplay}</span>
+                <span className="text-xs font-semibold" dir="ltr">{SITE_CONFIG.phoneDisplay}</span>
               </Button>
             </a>
 
@@ -158,7 +158,7 @@ export function SiteHeader() {
             <a href={getTelLink()} className="block px-3 pt-2">
               <Button variant="outline" className="w-full border-accent text-accent">
                 <Phone className="h-4 w-4 me-2" />
-                {SITE_CONFIG.phoneDisplay}
+                <span dir="ltr">{SITE_CONFIG.phoneDisplay}</span>
               </Button>
             </a>
           </nav>
