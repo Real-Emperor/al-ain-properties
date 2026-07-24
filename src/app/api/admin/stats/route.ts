@@ -4,7 +4,7 @@ import { verifyAdmin } from "../properties/route"
 
 export const dynamic = "force-dynamic"
 
-// GET /api/admin/stats — admin dashboard stats
+// GET /api/admin/stats - admin dashboard stats
 export async function GET(request: NextRequest) {
   const user = await verifyAdmin(request)
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })

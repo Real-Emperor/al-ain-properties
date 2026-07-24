@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs"
 
 export const dynamic = "force-dynamic"
 
-// POST /api/admin/login — admin login
+// POST /api/admin/login - admin login
 export async function POST(request: NextRequest) {
   try {
     const { email, password } = await request.json()

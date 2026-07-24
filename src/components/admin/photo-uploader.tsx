@@ -280,7 +280,7 @@ export function PhotoUploader({ value, onChange, label }: PhotoUploaderProps) {
               : "Click to upload photos from your device or drag files here"}
           </p>
           <p className="text-[10px] text-muted-foreground mt-1">
-            {locale === "ar" ? "JPG, PNG, WebP — حد أقصى 10 ميجابايت لكل صورة" : "JPG, PNG, WebP — max 10MB each"}
+            {locale === "ar" ? "JPG, PNG, WebP - حد أقصى 10 ميجابايت لكل صورة" : "JPG, PNG, WebP - max 10MB each"}
           </p>
         </div>
       )}

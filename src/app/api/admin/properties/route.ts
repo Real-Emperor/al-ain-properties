@@ -21,7 +21,7 @@ async function verifyAdmin(request: NextRequest) {
   }
 }
 
-// GET /api/admin/properties — list all properties (including drafts)
+// GET /api/admin/properties - list all properties (including drafts)
 export async function GET(request: NextRequest) {
   const user = await verifyAdmin(request)
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
   return NextResponse.json({ properties })
 }
 
-// POST /api/admin/properties — create new property
+// POST /api/admin/properties - create new property
 export async function POST(request: NextRequest) {
   const user = await verifyAdmin(request)
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// PUT /api/admin/properties — update property (expects id in body)
+// PUT /api/admin/properties - update property (expects id in body)
 export async function PUT(request: NextRequest) {
   const user = await verifyAdmin(request)
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
@@ -89,7 +89,7 @@ export async function PUT(request: NextRequest) {
   }
 }
 
-// DELETE /api/admin/properties — delete property (expects id in body)
+// DELETE /api/admin/properties - delete property (expects id in body)
 export async function DELETE(request: NextRequest) {
   const user = await verifyAdmin(request)
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })

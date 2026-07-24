@@ -1,4 +1,4 @@
-// Central site configuration — all contact info, areas, property types
+// Central site configuration - all contact info, areas, property types
 // This is the single source of truth for business-critical data.
 
 export const SITE_CONFIG = {

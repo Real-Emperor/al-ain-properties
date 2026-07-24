@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs"
 
 export const dynamic = "force-dynamic"
 
-// POST /api/seed — seed initial demo data (properties, news, admin user)
+// POST /api/seed - seed initial demo data (properties, news, admin user)
 // Idempotent: safe to call multiple times
 export async function POST(request: NextRequest) {
   try {
@@ -33,10 +33,10 @@ export async function POST(request: NextRequest) {
       results.adminUser = true
     }
 
-    // 2. Properties — NOT auto-seeded (admin adds their own via dashboard)
+    // 2. Properties - NOT auto-seeded (admin adds their own via dashboard)
     // Demo data was wiped for production use
 
-    // 3. News — NOT auto-seeded (admin adds their own via dashboard)
+    // 3. News - NOT auto-seeded (admin adds their own via dashboard)
 
     return NextResponse.json({
       success: true,
@@ -254,8 +254,8 @@ const SEED_PROPERTIES = [
   // ─── Apartments for Sale ───
   {
     slug: "2bed-apartment-sale-al-foah-investment",
-    titleEn: "2-Bedroom Apartment for Sale in Al Foah — Investment Opportunity",
-    titleAr: "شقة بغرفتي نوم للبيع في الفوعة — فرصة استثمارية",
+    titleEn: "2-Bedroom Apartment for Sale in Al Foah - Investment Opportunity",
+    titleAr: "شقة بغرفتي نوم للبيع في الفوعة - فرصة استثمارية",
     descriptionEn: "Excellent investment apartment in Al Foah. Currently tenanted, generating steady rental income. 2 bedrooms, 2 bathrooms, balcony, and dedicated parking. Strong rental demand in the area.",
     descriptionAr: "شقة استثمارية ممتازة في الفوعة. مؤجرة حالياً وتولد دخلاً إيجارياً ثابتاً. غرفتا نوم، حمامان، شرفة، وموقف سيارات مخصص. طلب إيجاري قوي في المنطقة.",
     type: "apartment", listingType: "sale", area: "al-foah",
@@ -367,8 +367,8 @@ const SEED_PROPERTIES = [
   // ─── Farms ───
   {
     slug: "date-palm-farm-al-foah-5acres",
-    titleEn: "Date Palm Farm — 5 Acres in Al Foah",
-    titleAr: "مزرعة نخيل — 5 أفدنة في الفوعة",
+    titleEn: "Date Palm Farm - 5 Acres in Al Foah",
+    titleAr: "مزرعة نخيل - 5 أفدنة في الفوعة",
     descriptionEn: "Productive date palm farm in the famous Al Foah agricultural area. 5 acres with 200+ mature date palms (Khalas and Fard varieties), irrigation system, worker accommodation, and storage. Excellent investment.",
     descriptionAr: "مزرعة نخيل منتجة في منطقة الفوعة الزراعية الشهيرة. 5 أفدنة مع أكثر من 200 نخلة ناضجة (أصناف خلاص وفرد)، نظام ري، سكن للعمال، وتخزين. استثمار ممتاز.",
     type: "farm", listingType: "sale", area: "al-foah",
@@ -382,8 +382,8 @@ const SEED_PROPERTIES = [
   },
   {
     slug: "family-farm-falaj-hazza-3acres",
-    titleEn: "Family Farm with Villa — 3 Acres in Falaj Hazza",
-    titleAr: "مزرعة عائلية مع فيلا — 3 أفدنة في فلج هزاع",
+    titleEn: "Family Farm with Villa - 3 Acres in Falaj Hazza",
+    titleAr: "مزرعة عائلية مع فيلا - 3 أفدنة في فلج هزاع",
     descriptionEn: "Charming family farm with a 3-bedroom villa, mature trees, vegetable garden, and falaj irrigation. Perfect weekend retreat. 3 acres of greenery in Falaj Hazza.",
     descriptionAr: "مزرعة عائلية ساحرة مع فيلا بـ 3 غرف نوم، أشجار ناضجة، حديقة خضروات، وري فلج. ملاذ مثالي لعطلة نهاية الأسبوع. 3 أفدنة من الخضرة في فلج هزاع.",
     type: "farm", listingType: "sale", area: "falaj-hazza",
@@ -399,8 +399,8 @@ const SEED_PROPERTIES = [
   // ─── Land ───
   {
     slug: "residential-land-al-maqam-10000sqft",
-    titleEn: "Residential Land — 10,000 sqft in Al Maqam",
-    titleAr: "أرض سكنية — 10000 قدم مربع في المقام",
+    titleEn: "Residential Land - 10,000 sqft in Al Maqam",
+    titleAr: "أرض سكنية - 10000 قدم مربع في المقام",
     descriptionEn: "Prime residential land plot in Al Maqam, 10,000 sqft. Ready for construction with all utilities available at the plot. Approved for G+1 residential building. Excellent location near schools and mosques.",
     descriptionAr: "قطعة أرض سكنية مميزة في المقام، 10000 قدم مربع. جاهزة للبناء مع توفر جميع المرافق عند القطعة. معتمدة لمبنى سكني G+1. موقع ممتاز قريب من المدارس والمساجد.",
     type: "land", listingType: "sale", area: "al-maqam",
@@ -414,8 +414,8 @@ const SEED_PROPERTIES = [
   },
   {
     slug: "commercial-land-al-jimi-corner-plot",
-    titleEn: "Commercial Land — Corner Plot in Al Jimi",
-    titleAr: "أرض تجارية — قطعة زاوية في الجيمي",
+    titleEn: "Commercial Land - Corner Plot in Al Jimi",
+    titleAr: "أرض تجارية - قطعة زاوية في الجيمي",
     descriptionEn: "Highly visible corner plot in Al Jimi, perfect for mixed-use development. 15,000 sqft with two road frontages. Approved for G+4 commercial building. Strong investment potential.",
     descriptionAr: "قطعة زاوية عالية الرؤية في الجيمي، مثالية للتطوير متعدد الاستخدامات. 15000 قدم مربع بيواجهتين على الطريق. معتمدة لمبنى تجاري G+4. إمكانات استثمارية قوية.",
     type: "land", listingType: "sale", area: "al-jimi",
@@ -526,8 +526,8 @@ const SEED_NEWS = [
     slug: "first-time-buyers-guide-al-ain",
     titleEn: "First-Time Buyer's Guide to Al Ain Property (2026)",
     titleAr: "دليل المشتري لأول مرة لعقارات العين (2026)",
-    excerptEn: "Everything you need to know about buying your first property in Al Ain — from financing to legal requirements.",
-    excerptAr: "كل ما تحتاج معرفته لشراء عقارك الأول في العين — من التمويل إلى المتطلبات القانونية.",
+    excerptEn: "Everything you need to know about buying your first property in Al Ain - from financing to legal requirements.",
+    excerptAr: "كل ما تحتاج معرفته لشراء عقارك الأول في العين - من التمويل إلى المتطلبات القانونية.",
     contentEn: "Buying your first property in Al Ain is an exciting milestone. Here's our comprehensive guide for 2026:\n\n**Step 1: Determine Your Budget**\nBeyond the purchase price, budget for:\n- 2% transfer fee (DLD)\n- 0.5% mortgage registration fee\n- AED 4,000 property valuation\n- AED 2,500 NOC fee (developer)\n- 1-2% agent commission\n\n**Step 2: Get Pre-Approved**\nUAE banks offer mortgages up to 80% LTV for expats (85% for nationals). Required documents:\n- 6 months bank statements\n- Salary certificate (or 2 years audited accounts for self-employed)\n- Valid Emirates ID\n- Passport copy\n\n**Step 3: Find the Right Property**\nFor first-time buyers, we recommend:\n- 1-2 bedroom apartments in Al Jimi or Al Hili (AED 600,000-1,200,000)\n- Townhouses in Zakher (AED 1,500,000-2,500,000)\n\n**Step 4: Make an Offer & Sign MOU**\nOnce accepted, sign Memorandum of Understanding (MOU) with 10% deposit (held in escrow).\n\n**Step 5: Mortgage & Transfer**\nFinalize mortgage, get NOC from developer, and transfer ownership at DLD.\n\n**Step 6: Get Your Keys!**\nReceive your title deed and keys. Don't forget to set up utilities (DEWA/ADDC) and change the locks.\n\nContact Al Ain Real Estate for a free first-time buyer consultation.",
     contentAr: "شراء عقارك الأول في العين محطة مثيرة. إليك دليلنا الشامل لعام 2026:\n\n**الخطوة 1: حدد ميزانيتك**\nبسعر الشراء، خصص ميزانية لـ:\n- 2% رسوم نقل (DLD)\n- 0.5% رسوم تسجيل الرهن العقاري\n- 4000 درهم تقييم العقار\n- 2500 درهم رسوم NOC (المطور)\n- 1-2% عمولة الوكيل\n\n**الخطوة 2: احصل على موافقة مسبقة**\nتقدم البنوك الإماراتية رهوناً عقارية تصل إلى 80% LTV للمغتربين (85% للمواطنين). المستندات المطلوبة:\n- كشوف حسابات بنكية لـ 6 أشهر\n- شهادة راتب (أو حسابات مدققة لـ سنتين للمستقلين)\n- الهوية الإماراتية سارية المفعول\n- نسخة جواز السفر\n\n**الخطوة 3: اعثر على العقار المناسب**\nللمشترين لأول مرة، نوصي بـ:\n- شقق بـ 1-2 غرفة نوم في الجيمي أو الهيلي (600,000-1,200,000 درهم)\n- تاون هاوس في زاخر (1,500,000-2,500,000 درهم)\n\n**الخطوة 4: قدم عرضاً ووقع مذكرة التفاهم**\nبمجرد القبول، وقع مذكرة التفاهم مع 10% كوديعة (تُحفظ في الضمان).\n\n**الخطوة 5: الرهن والنقل**\nأنهِ الرهن، احصل على NOC من المطور، وانقل الملكية في DLD.\n\n**الخطوة 6: استلم مفاتيحك!\nاستلم سند الملكية والمفاتيح. لا تنسَ إعداد المرافق (DEWA/ADDC) وتغيير الأقفال.\n\nتواصل مع العين العقارية للحصول على استشارة مجانية للمشترين لأول مرة.",
     category: "Investment News",

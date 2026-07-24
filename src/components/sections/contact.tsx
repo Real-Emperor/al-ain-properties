@@ -48,7 +48,7 @@ export function ContactSection() {
 
   return (
     <section id="contact" className="py-12 md:py-16 relative overflow-hidden">
-      {/* Faded background photo — VISIBLE between cards */}
+      {/* Faded background photo - VISIBLE between cards */}
       <div className="absolute inset-0 z-0">
         <img
           src="/mohammad-mosa-ali-faded.jpg"
@@ -56,7 +56,7 @@ export function ContactSection() {
           aria-hidden="true"
           className="w-full h-full object-cover"
         />
-        {/* Very light overlay — photo stays clearly visible */}
+        {/* Very light overlay - photo stays clearly visible */}
         <div className="absolute inset-0 bg-background/25" />
       </div>
 
@@ -67,7 +67,7 @@ export function ContactSection() {
           centered
         />
 
-        {/* Compact contact info bar — single row */}
+        {/* Compact contact info bar - single row */}
         <div className="flex flex-wrap items-center justify-center gap-3 md:gap-6 mt-8 mb-8">
           <a href={getTelLink()} className="flex items-center gap-2 px-4 py-2 rounded-full bg-background/80 backdrop-blur-md border border-[#c9a84c]/30 hover:bg-background hover:border-[#c9a84c] transition-all">
             <Phone className="h-4 w-4 text-[#c9a84c]" />
@@ -91,7 +91,7 @@ export function ContactSection() {
           </div>
         </div>
 
-        {/* Contact form — single card, compact */}
+        {/* Contact form - single card, compact */}
         <div className="max-w-xl mx-auto">
           <Card className="p-6 bg-background/85 backdrop-blur-md border-[#c9a84c]/20">
             <h3 className="text-lg font-bold mb-4 text-center">{t("contact.formTitle")}</h3>

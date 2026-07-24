@@ -91,7 +91,7 @@ export default function PropertyPage() {
           </Link>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Left — gallery + details */}
+            {/* Left - gallery + details */}
             <div className="lg:col-span-2 space-y-6">
               {/* Photo gallery */}
               <div className="relative aspect-[16/10] rounded-xl overflow-hidden bg-muted">
@@ -192,7 +192,7 @@ export default function PropertyPage() {
               )}
             </div>
 
-            {/* Right — price + CTA sidebar */}
+            {/* Right - price + CTA sidebar */}
             <div className="space-y-4">
               <Card className="p-6 sticky top-24">
                 <div className="text-3xl font-bold text-[#1e3a8a] dark:text-[#c9a84c] mb-1">

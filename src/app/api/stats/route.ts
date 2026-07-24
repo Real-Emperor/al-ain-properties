@@ -3,7 +3,7 @@ import { db } from "@/lib/db"
 
 export const dynamic = "force-dynamic"
 
-// GET /api/stats — public stats for homepage
+// GET /api/stats - public stats for homepage
 export async function GET() {
   try {
     const [totalProperties, totalAreas, totalViews, totalInquiries] = await Promise.all([

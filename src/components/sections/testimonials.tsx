@@ -20,8 +20,8 @@ const TESTIMONIALS = [
     nameAr: "سارة جونسون",
     roleEn: "Tenant, Al Hili",
     roleAr: "مستأجرة، الهيلي",
-    textEn: "As an expat new to Al Ain, I was nervous about finding an apartment. The team made the entire process seamless — from viewing to lease signing in 3 days. Highly recommended!",
-    textAr: "بصفتي مغتربة جديدة في العين، كنت قلقة بشأن العثور على شقة. جعل الفريق العملية بأكملها سلسة — من المعاينة إلى توقيع العقد في 3 أيام. أنصح بهم بشدة!",
+    textEn: "As an expat new to Al Ain, I was nervous about finding an apartment. The team made the entire process seamless, from viewing to lease signing in 3 days. Highly recommended!",
+    textAr: "بصفتي مغتربة جديدة في العين، كنت قلقة بشأن العثور على شقة. جعل الفريق العملية بأكملها سلسة - من المعاينة إلى توقيع العقد في 3 أيام. أنصح بهم بشدة!",
     rating: 5,
   },
   {

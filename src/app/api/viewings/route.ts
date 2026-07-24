@@ -3,7 +3,7 @@ import { db } from "@/lib/db"
 
 export const dynamic = "force-dynamic"
 
-// POST /api/viewings — create new viewing booking
+// POST /api/viewings - create new viewing booking
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()

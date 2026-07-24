@@ -4,7 +4,7 @@ import { AL_AIN_AREAS } from "@/lib/site-config"
 
 export const dynamic = "force-dynamic"
 
-// GET /api/areas — returns all visible areas (built-in + custom) with cover photos
+// GET /api/areas - returns all visible areas (built-in + custom) with cover photos
 export async function GET() {
   try {
     const [covers, customs] = await Promise.all([

@@ -13,7 +13,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: `${SITE_CONFIG.brandName.en} — Al Ain Room For Rent | Flats, Villas, Studios & Property for Sale`,
+    default: `${SITE_CONFIG.brandName.en} - Al Ain Room For Rent | Flats, Villas, Studios & Property for Sale`,
     template: `%s | ${SITE_CONFIG.brandName.en}`,
   },
   description:
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Mohammad Mosa Ali" }],
   openGraph: {
-    title: `${SITE_CONFIG.brandName.en} — Al Ain Room, Studio, Flat & Villa For Rent | Property For Sale`,
+    title: `${SITE_CONFIG.brandName.en} - Al Ain Room, Studio, Flat & Villa For Rent | Property For Sale`,
     description: "Find rooms, studios, flats, apartments, villas, and property for sale in Al Ain, UAE. Search by area, price, and type. WhatsApp instant contact. Bilingual Arabic & English.",
     type: "website",
     locale: "en_US",

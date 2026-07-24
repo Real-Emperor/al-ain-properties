@@ -3,7 +3,7 @@ import { db } from "@/lib/db"
 
 export const dynamic = "force-dynamic"
 
-// GET /api/property/[slug] — fetch single property by slug, increment views
+// GET /api/property/[slug] - fetch single property by slug, increment views
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ slug: string }> }

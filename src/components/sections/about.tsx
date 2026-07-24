@@ -41,7 +41,7 @@ export function AboutSection() {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left — story + mission */}
+          {/* Left - story + mission */}
           <div>
             <SectionHeader
               title={t("about.title")}
@@ -81,8 +81,8 @@ export function AboutSection() {
                   </div>
                   <p className="text-xs text-muted-foreground">
                     {locale === "ar"
-                      ? "المؤسس والمدير — العين العقارية"
-                      : "Founder & Director — Al Ain Real Estate"}
+                      ? "المؤسس والمدير، العين العقارية"
+                      : "Founder & Director, Al Ain Real Estate"}
                   </p>
                   <div className="flex items-center gap-3 mt-1.5 text-xs text-muted-foreground">
                     <a href={getWhatsAppLink()} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-[#c9a84c] transition-colors">
@@ -106,7 +106,7 @@ export function AboutSection() {
             </div>
           </div>
 
-          {/* Right — image collage + stats */}
+          {/* Right - image collage + stats */}
           <div className="relative">
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-3">

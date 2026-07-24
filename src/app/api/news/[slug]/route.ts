@@ -3,7 +3,7 @@ import { db } from "@/lib/db"
 
 export const dynamic = "force-dynamic"
 
-// PATCH /api/news/[slug] — increment article views
+// PATCH /api/news/[slug] - increment article views
 export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ slug: string }> }

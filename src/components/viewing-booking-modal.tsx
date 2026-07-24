@@ -89,7 +89,7 @@ ${form.email ? `📧 *البريد:* ${form.email}\n` : ""}
 ⏰ *الوقت المفضل:* ${timeLabel}
 ${form.message ? `💬 *ملاحظات:* ${form.message}\n` : ""}
 أرجو تأكيد الموعد. شكراً!`
-        : `🏛️ *Property Viewing Request — Al Ain Real Estate*
+        : `🏛️ *Property Viewing Request - Al Ain Real Estate*
 
 🏠 *Property:* ${propertyTitle}
 👤 *Name:* ${form.name}

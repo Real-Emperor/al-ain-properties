@@ -5,7 +5,7 @@ import { AL_AIN_AREAS } from "@/lib/site-config"
 
 export const dynamic = "force-dynamic"
 
-// GET /api/admin/areas — list all areas (built-in + custom) with admin info
+// GET /api/admin/areas - list all areas (built-in + custom) with admin info
 export async function GET(request: NextRequest) {
   const user = await verifyAdmin(request)
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
@@ -46,7 +46,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST /api/admin/areas — upsert cover image, toggle hidden, or add custom area
+// POST /api/admin/areas - upsert cover image, toggle hidden, or add custom area
 export async function POST(request: NextRequest) {
   const user = await verifyAdmin(request)
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
@@ -119,7 +119,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// DELETE /api/admin/areas — delete cover (revert to default) or delete custom area
+// DELETE /api/admin/areas - delete cover (revert to default) or delete custom area
 export async function DELETE(request: NextRequest) {
   const user = await verifyAdmin(request)
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })

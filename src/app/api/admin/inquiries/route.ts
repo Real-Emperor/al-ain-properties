@@ -4,7 +4,7 @@ import { verifyAdmin } from "../properties/route"
 
 export const dynamic = "force-dynamic"
 
-// GET /api/admin/inquiries — list all inquiries
+// GET /api/admin/inquiries - list all inquiries
 export async function GET(request: NextRequest) {
   const user = await verifyAdmin(request)
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
   return NextResponse.json({ inquiries })
 }
 
-// PUT /api/admin/inquiries — update inquiry status
+// PUT /api/admin/inquiries - update inquiry status
 export async function PUT(request: NextRequest) {
   const user = await verifyAdmin(request)
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })

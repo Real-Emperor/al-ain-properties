@@ -3,7 +3,7 @@ import { db } from "@/lib/db"
 
 export const dynamic = "force-dynamic"
 
-// GET /api/properties — list all properties (with optional filters)
+// GET /api/properties - list all properties (with optional filters)
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)

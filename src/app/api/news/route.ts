@@ -3,7 +3,7 @@ import { db } from "@/lib/db"
 
 export const dynamic = "force-dynamic"
 
-// GET /api/news — list news articles
+// GET /api/news - list news articles
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)

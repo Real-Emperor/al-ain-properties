@@ -6,9 +6,9 @@ import { Button } from "@/components/ui/button"
 import { Shield, AlertTriangle } from "lucide-react"
 
 /**
- * Demo Disclaimer Popup — shows on every page load/refresh.
+ * Demo Disclaimer Popup - shows on every page load/refresh.
  * Displays bilingual (Arabic + English) notice that this is a demonstration project.
- * No countdown timer — generic version for ongoing demo projects.
+ * No countdown timer - generic version for ongoing demo projects.
  */
 export function DemoDisclaimerPopup() {
   const [open, setOpen] = useState(false)
@@ -61,7 +61,7 @@ export function DemoDisclaimerPopup() {
             <span>صُنع بإتقان بواسطة استوديو فرونيسس · Crafted with precision by Studio of Phronesis</span>
           </div>
 
-          {/* Agree buttons — both languages */}
+          {/* Agree buttons - both languages */}
           <div className="grid grid-cols-2 gap-3">
             <Button
               onClick={handleAgree}

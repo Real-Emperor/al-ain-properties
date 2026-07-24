@@ -212,7 +212,7 @@ export const en = {
     storyTitle: "Our Story",
     storyContent: "Al Ain Real Estate was founded with a simple mission: to make property hunting in Al Ain effortless, transparent, and rewarding. As a locally-rooted agency, we know every neighborhood, every street, and every hidden gem in Al Ain. Whether you're looking for a family villa in Al Jimi, a modern apartment in Al Hili, or a commercial space in the city center, we're here to guide you every step of the way.",
     missionTitle: "Our Mission",
-    missionContent: "To connect people with properties that match their lifestyle, budget, and aspirations — backed by honest advice, deep market knowledge, and personalized service.",
+    missionContent: "To connect people with properties that match their lifestyle, budget, and aspirations, backed by honest advice, deep market knowledge, and personalized service.",
     whyChooseUs: "Why Choose Us",
     features: {
       localExpertise: {

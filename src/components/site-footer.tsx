@@ -117,7 +117,7 @@ export function SiteFooter() {
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-xs text-white/60 hover:text-[#c9a84c] transition-colors group"
-              title="Phronesis Studio — Studio of Practical Wisdom"
+              title="Phronesis Studio, Studio of Practical Wisdom"
             >
               <img
                 src="/phronesis-logo.png"
